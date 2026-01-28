@@ -138,11 +138,11 @@ class IUPAC(Environment):
 
         # Initialize OpenAI client for IUPAC grading
         # CRITICAL: API key must come from secrets parameter (never env vars)
-        api_key = secrets.get("OPENAI_API_KEY")
+        api_key = secrets.get("openai_api_key")
         if not api_key:
             raise ValueError(
                 "OpenAI API key required for IUPAC grading. "
-                "Pass via secrets={'OPENAI_API_KEY': '...'}"
+                "Pass via secrets={'openai_api_key': '...'}"
             )
         self.client = openai.AsyncClient(api_key=api_key)
 
