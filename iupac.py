@@ -1,0 +1,350 @@
+"""
+IUPAC Chemistry Environment for OpenReward
+
+Bidirectional chemistry task environment with two task types:
+1. iupac2smiles: Given IUPAC name → predict SMILES representation
+2. smiles2iupac: Given SMILES → predict IUPAC name
+
+Validation:
+- SMILES: RDKit canonical comparison with stereochemistry (ether0 benchmark standard)
+- IUPAC: gpt-5-mini grader (flexible matching for nomenclature variations)
+"""
+
+import json
+from pathlib import Path
+from typing import List, Literal
+
+import openai
+from pydantic import BaseModel, Field
+from rdkit import Chem
+
+from openreward.environments import Environment, JSONObject, TextBlock, ToolOutput, tool, Split
+
+
+import os
+
+if os.path.exists("/orwd_data"):
+    ENV_PATH = Path("/orwd_data")
+else:
+    ENV_PATH = Path(__file__).parent
+
+# =============================================================================
+# Module-Level Data Loading
+# =============================================================================
+
+def load_all_tasks() -> dict[str, list[dict]]:
+    """Load all task data from JSON files at module import time."""
+    data_dir = ENV_PATH / "data"
+    all_tasks = {}
+
+    for split in ["iupac2smiles_train", "iupac2smiles_test",
+                  "smiles2iupac_train", "smiles2iupac_test"]:
+        json_file = data_dir / f"{split}.json"
+        if json_file.exists():
+            with open(json_file, "r", encoding="utf-8") as f:
+                all_tasks[split] = json.load(f)
+        else:
+            print(f"Warning: {json_file} not found. Split '{split}' will be empty.")
+            all_tasks[split] = []
+
+    return all_tasks
+
+
+# Load all tasks once at module import
+ALL_TASKS = load_all_tasks()
+
+# Separate answer storage (backend only - never exposed to agents)
+ANSWERS = {
+    task["task_id"]: {
+        "smiles": task["smiles"],
+        "iupac": task["iupac"]
+    }
+    for split_tasks in ALL_TASKS.values()
+    for task in split_tasks
+}
+
+print(f"Loaded {len(ANSWERS)} IUPAC tasks across {len(ALL_TASKS)} splits")
+
+
+# =============================================================================
+# Grader Template
+# =============================================================================
+
+IUPAC_GRADER_TEMPLATE = """You are a chemistry expert evaluating IUPAC nomenclature.
+
+Determine if the predicted IUPAC name is chemically equivalent to the reference.
+IUPAC nomenclature has many valid variations:
+- "propan-1-ol" vs "1-propanol"
+- "dimethyl" vs "di-methyl"
+- Locant positioning variations
+- Stereochemistry notation differences
+
+Given SMILES: {smiles}
+Reference IUPAC: {reference_iupac}
+Predicted IUPAC: {predicted_iupac}
+
+Provide 2-3 sentences of analysis comparing the names, then conclude with:
+- "CORRECT" if the names refer to the same chemical structure
+- "INCORRECT" if they refer to different structures or if the predicted name is invalid
+"""
+
+
+# =============================================================================
+# Pydantic Models
+# =============================================================================
+
+class IUPACTaskSpec(BaseModel):
+    """Task specification for IUPAC environment."""
+    task_id: str
+    task_type: Literal["iupac2smiles", "smiles2iupac"]
+    cid: int
+    split: str
+    question: str
+
+
+class SubmitAnswerInput(BaseModel):
+    """Input schema for submit_answer tool."""
+    answer: str = Field(
+        ...,
+        description="Your answer: SMILES string for iupac2smiles tasks, or IUPAC name for smiles2iupac tasks"
+    )
+
+
+# =============================================================================
+# Main Environment Class
+# =============================================================================
+
+class IUPAC(Environment):
+    """
+    OpenReward environment for bidirectional IUPAC chemistry tasks.
+
+    Task Types:
+    - iupac2smiles: Given IUPAC name, predict SMILES representation
+    - smiles2iupac: Given SMILES, predict IUPAC name
+
+    Validation:
+    - SMILES answers validated using RDKit canonicalization
+    - IUPAC answers validated using gpt-5-mini grader
+    """
+
+    def __init__(self, task_spec: JSONObject, secrets: dict[str, str] = {}):
+        super().__init__(task_spec)
+        self.validated = IUPACTaskSpec.model_validate(task_spec)
+
+        # Get answer data from backend storage (not exposed to agents)
+        if self.validated.task_id not in ANSWERS:
+            raise ValueError(f"Task ID {self.validated.task_id} not found in answer storage")
+        self.answer_data = ANSWERS[self.validated.task_id]
+
+        # Initialize OpenAI client for IUPAC grading
+        # CRITICAL: API key must come from secrets parameter (never env vars)
+        api_key = secrets.get("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError(
+                "OpenAI API key required for IUPAC grading. "
+                "Pass via secrets={'OPENAI_API_KEY': '...'}"
+            )
+        self.client = openai.AsyncClient(api_key=api_key)
+
+    @classmethod
+    def list_splits(cls) -> list[Split]:
+        """Return all available splits."""
+        return [Split(name="iupac2smiles_train", type="train"), Split(name="iupac2smiles_test", type="test"),
+                Split(name="smiles2iupac_train", type="train"), Split(name="smiles2iupac_test", type="test")]
+
+    @classmethod
+    def list_tasks(cls, split: Split) -> list[JSONObject]:
+        """
+        Return task specifications for a given split.
+
+        IMPORTANT: This filters out answer data (smiles, iupac) to prevent leakage.
+        Only returns task_id, task_type, cid, split, and question.
+        """
+        if split not in ALL_TASKS:
+            raise ValueError(f"Unknown split: {split}. Available: {cls.list_splits()}")
+
+        # Filter out answer fields to prevent leakage
+        return [
+            {k: v for k, v in task.items() if k not in ["smiles", "iupac"]}
+            for task in ALL_TASKS[split]
+        ]
+
+    async def get_prompt(self) -> List[TextBlock]:
+        """Return the task prompt as a list of TextBlocks."""
+        return [TextBlock(text=self.validated.question)]
+
+    @tool
+    async def submit_answer(self, params: SubmitAnswerInput) -> ToolOutput:
+        """
+        Submit your final answer for the chemistry task.
+
+        For iupac2smiles tasks: Provide a SMILES string
+        For smiles2iupac tasks: Provide an IUPAC name
+
+        This tool validates your answer and returns reward + feedback.
+        The episode ends after calling this tool (finished=True).
+        """
+        if self.validated.task_type == "iupac2smiles":
+            return await self._validate_smiles(params.answer)
+        else:  # smiles2iupac
+            return await self._validate_iupac(params.answer)
+
+    # =========================================================================
+    # SMILES Validation (Deterministic with RDKit)
+    # =========================================================================
+
+    async def _validate_smiles(self, predicted_smiles: str) -> ToolOutput:
+        """
+        Validate SMILES answer using RDKit canonicalization with stereochemistry.
+
+        This provides deterministic validation by converting both predicted
+        and expected SMILES to canonical form (with stereochemistry preserved)
+        and comparing them. Follows the ether0 benchmark standard.
+
+        Examples:
+        - c1ccccc1 == C1=CC=CC=C1 (benzene - equivalent)
+        - CCO == OCC (ethanol - equivalent)
+        - Preserves R/S and E/Z stereochemistry for chiral molecules
+        """
+        try:
+            # Parse and canonicalize predicted SMILES
+            pred_mol = Chem.MolFromSmiles(predicted_smiles.strip())
+            if pred_mol is None:
+                return ToolOutput(
+                    blocks=[TextBlock(
+                        text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string."
+                    )],
+                    metadata={
+                        "error": "Invalid SMILES",
+                        "predicted": predicted_smiles,
+                        "task_type": "iupac2smiles"
+                    },
+                    reward=0.0,
+                    finished=True
+                )
+
+            # Canonicalize with stereochemistry preservation (following ether0 benchmark)
+            pred_canonical = Chem.MolToSmiles(pred_mol, canonical=True, isomericSmiles=True)
+
+            # Canonicalize expected SMILES
+            expected_mol = Chem.MolFromSmiles(self.answer_data["smiles"])
+            expected_canonical = Chem.MolToSmiles(expected_mol, canonical=True, isomericSmiles=True)
+
+            # Compare canonical forms
+            is_correct = (pred_canonical == expected_canonical)
+            reward = 1.0 if is_correct else 0.0
+
+            # Generate feedback
+            if is_correct:
+                feedback = f"""✅ Correct!
+
+Your answer: {predicted_smiles}
+Canonical form: {pred_canonical}
+
+This is the correct SMILES representation for the given IUPAC name."""
+            else:
+                feedback = f"""❌ Incorrect.
+
+Your answer: {predicted_smiles}
+Your canonical SMILES: {pred_canonical}
+
+Expected canonical SMILES: {expected_canonical}
+
+The structures do not match. Please try again."""
+
+            return ToolOutput(
+                blocks=[TextBlock(text=feedback)],
+                metadata={
+                    "predicted": predicted_smiles,
+                    "predicted_canonical": pred_canonical,
+                    "expected_canonical": expected_canonical,
+                    "correct": is_correct,
+                    "task_type": "iupac2smiles",
+                    "cid": self.validated.cid
+                },
+                reward=reward,
+                finished=True
+            )
+
+        except Exception as e:
+            return ToolOutput(
+                blocks=[TextBlock(text=f"❌ Error processing SMILES: {str(e)}")],
+                metadata={
+                    "error": str(e),
+                    "predicted": predicted_smiles,
+                    "task_type": "iupac2smiles"
+                },
+                reward=0.0,
+                finished=True
+            )
+
+    # =========================================================================
+    # IUPAC Validation (LLM Grader)
+    # =========================================================================
+
+    async def _validate_iupac(self, predicted_iupac: str) -> ToolOutput:
+        """
+        Validate IUPAC name using gpt-5-mini grader.
+
+        This provides flexible validation for IUPAC nomenclature variations.
+        The LLM grader understands chemical equivalence despite formatting differences.
+
+        Examples:
+        - "propan-1-ol" == "1-propanol" (equivalent)
+        - "dimethyl" == "di-methyl" (equivalent)
+        """
+        grader_prompt = IUPAC_GRADER_TEMPLATE.format(
+            smiles=self.answer_data["smiles"],
+            reference_iupac=self.answer_data["iupac"],
+            predicted_iupac=predicted_iupac
+        )
+
+        try:
+            # Call OpenAI API with gpt-5-mini
+            response = await self.client.chat.completions.create(
+                model="gpt-5-mini",
+                messages=[{"role": "user", "content": grader_prompt}],
+                stream=False
+            )
+
+            grading_response = response.choices[0].message.content or ""
+            upper_response = grading_response.upper()
+
+            # Parse verdict: "CORRECT" must be present AND "INCORRECT" must NOT be present
+            is_correct = "CORRECT" in upper_response and "INCORRECT" not in upper_response
+            reward = 1.0 if is_correct else 0.0
+
+            # Format feedback for agent
+            result_label = "✅ Correct" if is_correct else "❌ Incorrect"
+            feedback = f"""{grading_response}
+
+{result_label}
+
+Reference IUPAC name: {self.answer_data["iupac"]}
+Your answer: {predicted_iupac}"""
+
+            return ToolOutput(
+                blocks=[TextBlock(text=feedback)],
+                metadata={
+                    "predicted": predicted_iupac,
+                    "expected": self.answer_data["iupac"],
+                    "correct": is_correct,
+                    "grading_response": grading_response,
+                    "task_type": "smiles2iupac",
+                    "cid": self.validated.cid
+                },
+                reward=reward,
+                finished=True
+            )
+
+        except Exception as e:
+            return ToolOutput(
+                blocks=[TextBlock(text=f"❌ Grading error: {str(e)}")],
+                metadata={
+                    "error": str(e),
+                    "predicted": predicted_iupac,
+                    "task_type": "smiles2iupac"
+                },
+                reward=0.0,
+                finished=True
+            )
