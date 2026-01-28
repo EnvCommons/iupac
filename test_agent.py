@@ -13,7 +13,7 @@ async def main() -> None:
     or_client = AsyncOpenReward()
     oai_client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
-    environment = or_client.environments.get(name="GeneralReasoning/IUPAC", base_url="http://localhost:8080")
+    environment = or_client.environments.get(name="GeneralReasoning/IUPACNames")
     tasks = await environment.list_tasks(split="smiles2iupac_train")
     tools = await environment.list_tools(format="openai")
 
