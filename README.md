@@ -1,10 +1,10 @@
-# IUPAC
+# IUPACNames
 
-[![OpenReward Environment](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/EnvCommons/iupac)
+[![OpenReward Environment](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://www.openreward.ai/GeneralReasoning/IUPACNames)
 
 ## Description
 
-IUPAC is an environment for evaluating bidirectional chemistry nomenclature and structure representation tasks. It contains 2,400 compounds with tasks for converting between IUPAC chemical names and SMILES (Simplified Molecular Input Line Entry System) representations, sourced from PubChem.
+IUPACNames is an environment for evaluating bidirectional chemistry nomenclature and structure representation tasks. It contains 2,400 compounds with tasks for converting between IUPAC chemical names and SMILES (Simplified Molecular Input Line Entry System) representations, sourced from PubChem.
 
 ## Capabilities
 
@@ -58,7 +58,7 @@ Single-turn. The agent reads the chemistry question and submits one answer.
 
 ## Environment Difficulty
 
-IUPAC evaluates chemistry nomenclature understanding with flexible validation for equivalent representations.
+[Put environment difficulty here]
 
 ## Other Environment Requirements
 
@@ -66,15 +66,15 @@ OpenAI API key required for IUPAC name grading. Pass via `secrets={"openai_api_k
 
 ## Safety
 
-Agents in IUPAC convert between chemical representations in a standard environment. The environment does not present direct safety risks.
+Agents in IUPACNames convert between chemical representations in a standard environment. The environment does not present direct safety risks.
 
 ## Citation
 
 ```bibtex
-@software{iupac_openreward,
-  title={IUPAC Chemistry Environment for OpenReward},
-  author={EnvCommons},
+@software{iupacnames2025,
+  title={IUPACNames: Chemistry Nomenclature Environment for OpenReward},
+  author={{General Reasoning Inc. Team}},
   year={2025},
-  url={https://github.com/EnvCommons/iupac}
+  url={https://www.openreward.ai/GeneralReasoning/IUPACNames}
 }
 ```

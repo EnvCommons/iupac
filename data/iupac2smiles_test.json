@@ -1,0 +1,1802 @@
+[
+  {
+    "task_id": "iupac2smiles_test_0000",
+    "task_type": "iupac2smiles",
+    "cid": 1131,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethyl dihydrogen phosphate",
+    "smiles": "CC1=C(SC=[N+]1CC2=CN=C(N=C2N)C)CCOP(=O)(O)O",
+    "question": "Given the IUPAC name '2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0001",
+    "task_type": "iupac2smiles",
+    "cid": 1074,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl] dihydrogen phosphate",
+    "smiles": "C(C1C(C(C(O1)OP(=O)(O)O)O)O)O",
+    "question": "Given the IUPAC name '[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl] dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0002",
+    "task_type": "iupac2smiles",
+    "cid": 1190,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-(2,6-dioxo-3H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=NC2=C(N1C3C(C(C(O3)COP(=O)(O)O)O)O)NC(=O)NC2=O",
+    "question": "Given the IUPAC name '[5-(2,6-dioxo-3H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0003",
+    "task_type": "iupac2smiles",
+    "cid": 1028,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(2-carboxy-2-oxoethyl)-4-hydroxycyclohexa-2,5-diene-1-carboxylic acid",
+    "smiles": "C1=CC(C=CC1O)(CC(=O)C(=O)O)C(=O)O",
+    "question": "Given the IUPAC name '1-(2-carboxy-2-oxoethyl)-4-hydroxycyclohexa-2,5-diene-1-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0004",
+    "task_type": "iupac2smiles",
+    "cid": 1178,
+    "split": "iupac2smiles_test",
+    "iupac": "3-(1H-imidazol-5-yl)prop-2-enoic acid",
+    "smiles": "C1=C(NC=N1)C=CC(=O)O",
+    "question": "Given the IUPAC name '3-(1H-imidazol-5-yl)prop-2-enoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0005",
+    "task_type": "iupac2smiles",
+    "cid": 1162,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxyprop-2-enoic acid",
+    "smiles": "CC(=O)NC1C(C(C(OC1OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)CO)O)OC(=C)C(=O)O",
+    "question": "Given the IUPAC name '2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxyprop-2-enoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0006",
+    "task_type": "iupac2smiles",
+    "cid": 1259,
+    "split": "iupac2smiles_test",
+    "iupac": "4-amino-N-[2-(8,11-dioxo-10-propan-2-yl-2-oxa-9,12-diazabicyclo[13.2.2]nonadeca-1(17),15,18-trien-13-yl)-2-hydroxyethyl]-N-(3-methylbutyl)benzenesulfonamide",
+    "smiles": "CC(C)CCN(CC(C1CC2=CC=C(C=C2)OCCCCCC(=O)NC(C(=O)N1)C(C)C)O)S(=O)(=O)C3=CC=C(C=C3)N",
+    "question": "Given the IUPAC name '4-amino-N-[2-(8,11-dioxo-10-propan-2-yl-2-oxa-9,12-diazabicyclo[13.2.2]nonadeca-1(17),15,18-trien-13-yl)-2-hydroxyethyl]-N-(3-methylbutyl)benzenesulfonamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0007",
+    "task_type": "iupac2smiles",
+    "cid": 1209,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-(3,5-dioxo-1,2,4-oxadiazolidin-2-yl)propanoic acid",
+    "smiles": "C(C(C(=O)O)N)N1C(=O)NC(=O)O1",
+    "question": "Given the IUPAC name '2-amino-3-(3,5-dioxo-1,2,4-oxadiazolidin-2-yl)propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0008",
+    "task_type": "iupac2smiles",
+    "cid": 1157,
+    "split": "iupac2smiles_test",
+    "iupac": "2,3-dimethoxy-5-methyl-6-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)cyclohexa-2,5-diene-1,4-dione",
+    "smiles": "CC1=C(C(=O)C(=C(C1=O)OC)OC)CC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)C",
+    "question": "Given the IUPAC name '2,3-dimethoxy-5-methyl-6-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)cyclohexa-2,5-diene-1,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0009",
+    "task_type": "iupac2smiles",
+    "cid": 1088,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(methylamino)acetic acid",
+    "smiles": "CNCC(=O)O",
+    "question": "Given the IUPAC name '2-(methylamino)acetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0010",
+    "task_type": "iupac2smiles",
+    "cid": 1255,
+    "split": "iupac2smiles_test",
+    "iupac": "9-methoxy-1,2,3,4,4a,7,7a,13-octahydro-4,12-methanobenzofuro[3,2-e]isoquinolin-7-ol",
+    "smiles": "COC1=C2C3=C(CC4C5C3(CCN4)C(O2)C(C=C5)O)C=C1",
+    "question": "Given the IUPAC name '9-methoxy-1,2,3,4,4a,7,7a,13-octahydro-4,12-methanobenzofuro[3,2-e]isoquinolin-7-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0011",
+    "task_type": "iupac2smiles",
+    "cid": 1251,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(1,1,7-trimethyl-6-methylidene-3,4,5,7,8,9-hexahydro-2H-benzo[7]annulen-5-yl)benzene-1,4-diol",
+    "smiles": "CC1CCC2=C(CCCC2(C)C)C(C1=C)C3=C(C=CC(=C3)O)O",
+    "question": "Given the IUPAC name '2-(1,1,7-trimethyl-6-methylidene-3,4,5,7,8,9-hexahydro-2H-benzo[7]annulen-5-yl)benzene-1,4-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0012",
+    "task_type": "iupac2smiles",
+    "cid": 1290,
+    "split": "iupac2smiles_test",
+    "iupac": "[[2-(4-iodophenyl)acetyl]amino]methylphosphinic acid",
+    "smiles": "C1=CC(=CC=C1CC(=O)NCP(=O)O)I",
+    "question": "Given the IUPAC name '[[2-(4-iodophenyl)acetyl]amino]methylphosphinic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0013",
+    "task_type": "iupac2smiles",
+    "cid": 1172,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=CN(C(=O)NC1=O)C2C(C(C(O2)COP(=O)(O)O)O)O",
+    "question": "Given the IUPAC name '[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0014",
+    "task_type": "iupac2smiles",
+    "cid": 1287,
+    "split": "iupac2smiles_test",
+    "iupac": "[5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate",
+    "smiles": "C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O",
+    "question": "Given the IUPAC name '[5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0015",
+    "task_type": "iupac2smiles",
+    "cid": 1268,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[2-(benzylamino)-2-oxo-1-[(2-phenylacetyl)amino]ethyl]-5,5-dimethyl-1,3-thiazolidine-4-carboxylic acid",
+    "smiles": "CC1(C(NC(S1)C(C(=O)NCC2=CC=CC=C2)NC(=O)CC3=CC=CC=C3)C(=O)O)C",
+    "question": "Given the IUPAC name '2-[2-(benzylamino)-2-oxo-1-[(2-phenylacetyl)amino]ethyl]-5,5-dimethyl-1,3-thiazolidine-4-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0016",
+    "task_type": "iupac2smiles",
+    "cid": 1257,
+    "split": "iupac2smiles_test",
+    "iupac": "5-propyl-1,4,4a,6,7,8,8a,9-octahydropyrazolo[5,4-g]quinoline",
+    "smiles": "CCCN1CCCC2C1CC3=C(C2)NN=C3",
+    "question": "Given the IUPAC name '5-propyl-1,4,4a,6,7,8,8a,9-octahydropyrazolo[5,4-g]quinoline', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0017",
+    "task_type": "iupac2smiles",
+    "cid": 1150,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(1H-indol-3-yl)ethanamine",
+    "smiles": "C1=CC=C2C(=C1)C(=CN2)CCN",
+    "question": "Given the IUPAC name '2-(1H-indol-3-yl)ethanamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0018",
+    "task_type": "iupac2smiles",
+    "cid": 1011,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-(4-carbamoyl-5-formamidoimidazol-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=NC(=C(N1C2C(C(C(O2)COP(=O)(O)O)O)O)NC=O)C(=O)N",
+    "question": "Given the IUPAC name '[5-(4-carbamoyl-5-formamidoimidazol-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0019",
+    "task_type": "iupac2smiles",
+    "cid": 1033,
+    "split": "iupac2smiles_test",
+    "iupac": "S-[2-[3-[[4-[[[5-(6-aminopurin-9-yl)-4-hydroxy-3-phosphonooxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-2-hydroxy-3,3-dimethylbutanoyl]amino]propanoylamino]ethyl] propanethioate",
+    "smiles": "CCC(=O)SCCNC(=O)CCNC(=O)C(C(C)(C)COP(=O)(O)OP(=O)(O)OCC1C(C(C(O1)N2C=NC3=C(N=CN=C32)N)O)OP(=O)(O)O)O",
+    "question": "Given the IUPAC name 'S-[2-[3-[[4-[[[5-(6-aminopurin-9-yl)-4-hydroxy-3-phosphonooxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-2-hydroxy-3,3-dimethylbutanoyl]amino]propanoylamino]ethyl] propanethioate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0020",
+    "task_type": "iupac2smiles",
+    "cid": 1192,
+    "split": "iupac2smiles_test",
+    "iupac": "(2,3-dihydroxy-4-oxo-5-phosphonooxypentyl) dihydrogen phosphate",
+    "smiles": "C(C(C(C(=O)COP(=O)(O)O)O)O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '(2,3-dihydroxy-4-oxo-5-phosphonooxypentyl) dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0021",
+    "task_type": "iupac2smiles",
+    "cid": 1135,
+    "split": "iupac2smiles_test",
+    "iupac": "5-methyl-1H-pyrimidine-2,4-dione",
+    "smiles": "CC1=CNC(=O)NC1=O",
+    "question": "Given the IUPAC name '5-methyl-1H-pyrimidine-2,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0022",
+    "task_type": "iupac2smiles",
+    "cid": 1227,
+    "split": "iupac2smiles_test",
+    "iupac": "1-methyl-5-pyridin-2-ylpyrrolidin-2-one",
+    "smiles": "CN1C(CCC1=O)C2=CC=CC=N2",
+    "question": "Given the IUPAC name '1-methyl-5-pyridin-2-ylpyrrolidin-2-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0023",
+    "task_type": "iupac2smiles",
+    "cid": 1249,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol",
+    "smiles": "C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)O",
+    "question": "Given the IUPAC name '2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0024",
+    "task_type": "iupac2smiles",
+    "cid": 1273,
+    "split": "iupac2smiles_test",
+    "iupac": "3-formyl-2-[[(4-nitrophenyl)sulfonylamino]methyl]pentanoic acid",
+    "smiles": "CCC(C=O)C(CNS(=O)(=O)C1=CC=C(C=C1)[N+](=O)[O-])C(=O)O",
+    "question": "Given the IUPAC name '3-formyl-2-[[(4-nitrophenyl)sulfonylamino]methyl]pentanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0025",
+    "task_type": "iupac2smiles",
+    "cid": 1112,
+    "split": "iupac2smiles_test",
+    "iupac": "4-oxobutanoic acid",
+    "smiles": "C(CC(=O)O)C=O",
+    "question": "Given the IUPAC name '4-oxobutanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0026",
+    "task_type": "iupac2smiles",
+    "cid": 1107,
+    "split": "iupac2smiles_test",
+    "iupac": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17-hexadecahydro-1H-cyclopenta[a]phenanthren-3-ol",
+    "smiles": "C1CC2CCC3C4CCC(CC4CCC3C2C1)O",
+    "question": "Given the IUPAC name '2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17-hexadecahydro-1H-cyclopenta[a]phenanthren-3-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0027",
+    "task_type": "iupac2smiles",
+    "cid": 1105,
+    "split": "iupac2smiles_test",
+    "iupac": "2,6,10,15,19,23-hexamethyltetracosa-2,6,10,14,18,22-hexaene",
+    "smiles": "CC(=CCCC(=CCCC(=CCCC=C(C)CCC=C(C)CCC=C(C)C)C)C)C",
+    "question": "Given the IUPAC name '2,6,10,15,19,23-hexamethyltetracosa-2,6,10,14,18,22-hexaene', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0028",
+    "task_type": "iupac2smiles",
+    "cid": 1240,
+    "split": "iupac2smiles_test",
+    "iupac": "6-[2-phenylethyl(propyl)amino]-5,6,7,8-tetrahydronaphthalen-1-ol",
+    "smiles": "CCCN(CCC1=CC=CC=C1)C2CCC3=C(C2)C=CC=C3O",
+    "question": "Given the IUPAC name '6-[2-phenylethyl(propyl)amino]-5,6,7,8-tetrahydronaphthalen-1-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0029",
+    "task_type": "iupac2smiles",
+    "cid": 1053,
+    "split": "iupac2smiles_test",
+    "iupac": "[4-(aminomethyl)-5-hydroxy-6-methyl-3-pyridinyl]methyl dihydrogen phosphate",
+    "smiles": "CC1=NC=C(C(=C1O)CN)COP(=O)(O)O",
+    "question": "Given the IUPAC name '[4-(aminomethyl)-5-hydroxy-6-methyl-3-pyridinyl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0030",
+    "task_type": "iupac2smiles",
+    "cid": 1072,
+    "split": "iupac2smiles_test",
+    "iupac": "7,8-dimethyl-10-(2,3,4,5-tetrahydroxypentyl)benzo[g]pteridine-2,4-dione",
+    "smiles": "CC1=CC2=C(C=C1C)N(C3=NC(=O)NC(=O)C3=N2)CC(C(C(CO)O)O)O",
+    "question": "Given the IUPAC name '7,8-dimethyl-10-(2,3,4,5-tetrahydroxypentyl)benzo[g]pteridine-2,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0031",
+    "task_type": "iupac2smiles",
+    "cid": 1013,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-[4-carbamoyl-5-[(3,4-dihydroxy-2-oxo-5-phosphonooxypentyl)iminomethylamino]imidazol-1-yl]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=NC(=C(N1C2C(C(C(O2)COP(=O)(O)O)O)O)NC=NCC(=O)C(C(COP(=O)(O)O)O)O)C(=O)N",
+    "question": "Given the IUPAC name '[5-[4-carbamoyl-5-[(3,4-dihydroxy-2-oxo-5-phosphonooxypentyl)iminomethylamino]imidazol-1-yl]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0032",
+    "task_type": "iupac2smiles",
+    "cid": 1286,
+    "split": "iupac2smiles_test",
+    "iupac": "3,4-bis[(3,4-dimethoxyphenyl)methyl]oxolan-2-one",
+    "smiles": "COC1=C(C=C(C=C1)CC2COC(=O)C2CC3=CC(=C(C=C3)OC)OC)OC",
+    "question": "Given the IUPAC name '3,4-bis[(3,4-dimethoxyphenyl)methyl]oxolan-2-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0033",
+    "task_type": "iupac2smiles",
+    "cid": 1206,
+    "split": "iupac2smiles_test",
+    "iupac": "N-methyl-1-phenylpropan-2-amine",
+    "smiles": "CC(CC1=CC=CC=C1)NC",
+    "question": "Given the IUPAC name 'N-methyl-1-phenylpropan-2-amine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0034",
+    "task_type": "iupac2smiles",
+    "cid": 1049,
+    "split": "iupac2smiles_test",
+    "iupac": "pyridine",
+    "smiles": "C1=CC=NC=C1",
+    "question": "Given the IUPAC name 'pyridine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0035",
+    "task_type": "iupac2smiles",
+    "cid": 1090,
+    "split": "iupac2smiles_test",
+    "iupac": "selenite",
+    "smiles": "[O-][Se](=O)[O-]",
+    "question": "Given the IUPAC name 'selenite', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0036",
+    "task_type": "iupac2smiles",
+    "cid": 1229,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(4-iodo-2,5-dimethoxyphenyl)propan-2-amine",
+    "smiles": "CC(CC1=CC(=C(C=C1OC)I)OC)N",
+    "question": "Given the IUPAC name '1-(4-iodo-2,5-dimethoxyphenyl)propan-2-amine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0037",
+    "task_type": "iupac2smiles",
+    "cid": 1283,
+    "split": "iupac2smiles_test",
+    "iupac": "5-iodo-1,3-diazinane-2,4-dione",
+    "smiles": "C1C(C(=O)NC(=O)N1)I",
+    "question": "Given the IUPAC name '5-iodo-1,3-diazinane-2,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0038",
+    "task_type": "iupac2smiles",
+    "cid": 1087,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[(5-amino-5-carboxypentyl)amino]pentanedioic acid",
+    "smiles": "C(CCNC(CCC(=O)O)C(=O)O)CC(C(=O)O)N",
+    "question": "Given the IUPAC name '2-[(5-amino-5-carboxypentyl)amino]pentanedioic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0039",
+    "task_type": "iupac2smiles",
+    "cid": 1245,
+    "split": "iupac2smiles_test",
+    "iupac": "2-hydroxy-2-(4-hydroxy-3-methoxyphenyl)acetic acid",
+    "smiles": "COC1=C(C=CC(=C1)C(C(=O)O)O)O",
+    "question": "Given the IUPAC name '2-hydroxy-2-(4-hydroxy-3-methoxyphenyl)acetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0040",
+    "task_type": "iupac2smiles",
+    "cid": 1152,
+    "split": "iupac2smiles_test",
+    "iupac": "dihydroxy(dioxo)tungsten",
+    "smiles": "O[W](=O)(=O)O",
+    "question": "Given the IUPAC name 'dihydroxy(dioxo)tungsten', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0041",
+    "task_type": "iupac2smiles",
+    "cid": 1108,
+    "split": "iupac2smiles_test",
+    "iupac": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17-hexadecahydro-1H-cyclopenta[a]phenanthrene",
+    "smiles": "C1CCC2C(C1)CCC3C2CCC4C3CCC4",
+    "question": "Given the IUPAC name '2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17-hexadecahydro-1H-cyclopenta[a]phenanthrene', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0042",
+    "task_type": "iupac2smiles",
+    "cid": 1214,
+    "split": "iupac2smiles_test",
+    "iupac": "1-aminocyclobutane-1,3-dicarboxylic acid",
+    "smiles": "C1C(CC1(C(=O)O)N)C(=O)O",
+    "question": "Given the IUPAC name '1-aminocyclobutane-1,3-dicarboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0043",
+    "task_type": "iupac2smiles",
+    "cid": 1006,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-hydroxy-4-phosphonooxybutanoate",
+    "smiles": "C(C(C(C(=O)[O-])N)O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '2-amino-3-hydroxy-4-phosphonooxybutanoate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0044",
+    "task_type": "iupac2smiles",
+    "cid": 1202,
+    "split": "iupac2smiles_test",
+    "iupac": "7-[3-(3-hydroxyoct-1-enyl)-2-bicyclo[3.1.1]heptanyl]hept-5-enoic acid",
+    "smiles": "CCCCCC(C=CC1CC2CC(C2)C1CC=CCCCC(=O)O)O",
+    "question": "Given the IUPAC name '7-[3-(3-hydroxyoct-1-enyl)-2-bicyclo[3.1.1]heptanyl]hept-5-enoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0045",
+    "task_type": "iupac2smiles",
+    "cid": 1281,
+    "split": "iupac2smiles_test",
+    "iupac": "[amino-[2-(1H-benzimidazol-2-ylmethyl)-3H-benzimidazol-5-yl]methylidene]azanium",
+    "smiles": "C1=CC=C2C(=C1)NC(=N2)CC3=NC4=C(N3)C=C(C=C4)C(=[NH2+])N",
+    "question": "Given the IUPAC name '[amino-[2-(1H-benzimidazol-2-ylmethyl)-3H-benzimidazol-5-yl]methylidene]azanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0046",
+    "task_type": "iupac2smiles",
+    "cid": 1147,
+    "split": "iupac2smiles_test",
+    "iupac": "trimethylsulfanium",
+    "smiles": "C[S+](C)C",
+    "question": "Given the IUPAC name 'trimethylsulfanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0047",
+    "task_type": "iupac2smiles",
+    "cid": 1186,
+    "split": "iupac2smiles_test",
+    "iupac": "oxidophosphonoyloxyphosphinate",
+    "smiles": "[O-]P(=O)OP(=O)[O-]",
+    "question": "Given the IUPAC name 'oxidophosphonoyloxyphosphinate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0048",
+    "task_type": "iupac2smiles",
+    "cid": 1224,
+    "split": "iupac2smiles_test",
+    "iupac": "6-tert-butyl-3-azapentacyclo[11.8.1.03,8.09,22.016,21]docosa-9,11,13(22),16,18,20-hexaen-6-ol",
+    "smiles": "CC(C)(C)C1(CCN2CC3C4=CC=CC=C4CCC5=C3C(=CC=C5)C2C1)O",
+    "question": "Given the IUPAC name '6-tert-butyl-3-azapentacyclo[11.8.1.03,8.09,22.016,21]docosa-9,11,13(22),16,18,20-hexaen-6-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0049",
+    "task_type": "iupac2smiles",
+    "cid": 1246,
+    "split": "iupac2smiles_test",
+    "iupac": "3-(cyclopropylmethyl)-4a-hydroxy-9-methoxy-2,4,5,6,7a,13-hexahydro-1H-4,12-methanobenzofuro[3,2-e]isoquinolin-7-one",
+    "smiles": "COC1=C2C3=C(CC4C5(C3(CCN4CC6CC6)C(O2)C(=O)CC5)O)C=C1",
+    "question": "Given the IUPAC name '3-(cyclopropylmethyl)-4a-hydroxy-9-methoxy-2,4,5,6,7a,13-hexahydro-1H-4,12-methanobenzofuro[3,2-e]isoquinolin-7-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0050",
+    "task_type": "iupac2smiles",
+    "cid": 1242,
+    "split": "iupac2smiles_test",
+    "iupac": "5-phenyl-2,3,4,5-tetrahydro-1H-3-benzazepine-7,8-diol",
+    "smiles": "C1CNCC(C2=CC(=C(C=C21)O)O)C3=CC=CC=C3",
+    "question": "Given the IUPAC name '5-phenyl-2,3,4,5-tetrahydro-1H-3-benzazepine-7,8-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0051",
+    "task_type": "iupac2smiles",
+    "cid": 1096,
+    "split": "iupac2smiles_test",
+    "iupac": "iron(3+);3-[7,13,17-tris(2-carboxyethyl)-3,8,12,18-tetrakis(carboxymethyl)-12,18-dimethyl-2,3,8,9,13,17-hexahydro-1H-porphyrin-21,22,24-triid-2-yl]propanoic acid",
+    "smiles": "CC1(C(C2=CC3=NC(=CC4C(C(=C([N-]4)C=C5C(C(C([N-]5)C=C1[N-]2)CCC(=O)O)CC(=O)O)CCC(=O)O)CC(=O)O)C(C3CCC(=O)O)(C)CC(=O)O)CCC(=O)O)CC(=O)O.[Fe+3]",
+    "question": "Given the IUPAC name 'iron(3+);3-[7,13,17-tris(2-carboxyethyl)-3,8,12,18-tetrakis(carboxymethyl)-12,18-dimethyl-2,3,8,9,13,17-hexahydro-1H-porphyrin-21,22,24-triid-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0052",
+    "task_type": "iupac2smiles",
+    "cid": 1278,
+    "split": "iupac2smiles_test",
+    "iupac": "[amino-[2-(4-benzylpiperidine-1-carbonyl)-3aH-indol-5-yl]methylidene]azanium",
+    "smiles": "C1CN(CCC1CC2=CC=CC=C2)C(=O)C3=CC4C=C(C=CC4=N3)C(=[NH2+])N",
+    "question": "Given the IUPAC name '[amino-[2-(4-benzylpiperidine-1-carbonyl)-3aH-indol-5-yl]methylidene]azanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0053",
+    "task_type": "iupac2smiles",
+    "cid": 1165,
+    "split": "iupac2smiles_test",
+    "iupac": "[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] (3,4,5-trihydroxyoxan-2-yl) hydrogen phosphate",
+    "smiles": "C1C(C(C(C(O1)OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)O)O)O",
+    "question": "Given the IUPAC name '[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] (3,4,5-trihydroxyoxan-2-yl) hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0054",
+    "task_type": "iupac2smiles",
+    "cid": 1051,
+    "split": "iupac2smiles_test",
+    "iupac": "(4-formyl-5-hydroxy-6-methyl-3-pyridinyl)methyl dihydrogen phosphate",
+    "smiles": "CC1=NC=C(C(=C1O)C=O)COP(=O)(O)O",
+    "question": "Given the IUPAC name '(4-formyl-5-hydroxy-6-methyl-3-pyridinyl)methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0055",
+    "task_type": "iupac2smiles",
+    "cid": 1031,
+    "split": "iupac2smiles_test",
+    "iupac": "propan-1-ol",
+    "smiles": "CCCO",
+    "question": "Given the IUPAC name 'propan-1-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0056",
+    "task_type": "iupac2smiles",
+    "cid": 1201,
+    "split": "iupac2smiles_test",
+    "iupac": "18-hydroxy-10,10,16,17-tetramethyl-6-propyl-3,9,15-trioxatetracyclo[12.4.0.02,7.08,13]octadeca-1(14),2(7),5,8(13),11-pentaen-4-one",
+    "smiles": "CCCC1=CC(=O)OC2=C1C3=C(C=CC(O3)(C)C)C4=C2C(C(C(O4)C)C)O",
+    "question": "Given the IUPAC name '18-hydroxy-10,10,16,17-tetramethyl-6-propyl-3,9,15-trioxatetracyclo[12.4.0.02,7.08,13]octadeca-1(14),2(7),5,8(13),11-pentaen-4-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0057",
+    "task_type": "iupac2smiles",
+    "cid": 1216,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-5-phosphonopentanoic acid",
+    "smiles": "C(CC(C(=O)O)N)CP(=O)(O)O",
+    "question": "Given the IUPAC name '2-amino-5-phosphonopentanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0058",
+    "task_type": "iupac2smiles",
+    "cid": 1052,
+    "split": "iupac2smiles_test",
+    "iupac": "4-(aminomethyl)-5-(hydroxymethyl)-2-methylpyridin-3-ol",
+    "smiles": "CC1=NC=C(C(=C1O)CN)CO",
+    "question": "Given the IUPAC name '4-(aminomethyl)-5-(hydroxymethyl)-2-methylpyridin-3-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0059",
+    "task_type": "iupac2smiles",
+    "cid": 1256,
+    "split": "iupac2smiles_test",
+    "iupac": "4-prop-1-en-2-ylcyclohexene-1-carboxylic acid",
+    "smiles": "CC(=C)C1CCC(=CC1)C(=O)O",
+    "question": "Given the IUPAC name '4-prop-1-en-2-ylcyclohexene-1-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0060",
+    "task_type": "iupac2smiles",
+    "cid": 1119,
+    "split": "iupac2smiles_test",
+    "iupac": "sulfur dioxide",
+    "smiles": "O=S=O",
+    "question": "Given the IUPAC name 'sulfur dioxide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0061",
+    "task_type": "iupac2smiles",
+    "cid": 1189,
+    "split": "iupac2smiles_test",
+    "iupac": "9-[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-3H-purine-2,6-dione",
+    "smiles": "C1=NC2=C(N1C3C(C(C(O3)CO)O)O)NC(=O)NC2=O",
+    "question": "Given the IUPAC name '9-[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-3H-purine-2,6-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0062",
+    "task_type": "iupac2smiles",
+    "cid": 1050,
+    "split": "iupac2smiles_test",
+    "iupac": "3-hydroxy-5-(hydroxymethyl)-2-methylpyridine-4-carbaldehyde",
+    "smiles": "CC1=NC=C(C(=C1O)C=O)CO",
+    "question": "Given the IUPAC name '3-hydroxy-5-(hydroxymethyl)-2-methylpyridine-4-carbaldehyde', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0063",
+    "task_type": "iupac2smiles",
+    "cid": 1012,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-[[[5-carbamoyl-3-[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl]imidazol-4-yl]amino]methylideneamino]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=NC(=C(N1C2C(C(C(O2)COP(=O)(O)O)O)O)NC=NC3C(C(C(O3)COP(=O)(O)O)O)O)C(=O)N",
+    "question": "Given the IUPAC name '[5-[[[5-carbamoyl-3-[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl]imidazol-4-yl]amino]methylideneamino]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0064",
+    "task_type": "iupac2smiles",
+    "cid": 1133,
+    "split": "iupac2smiles_test",
+    "iupac": "2-sulfanylacetic acid",
+    "smiles": "C(C(=O)O)S",
+    "question": "Given the IUPAC name '2-sulfanylacetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0065",
+    "task_type": "iupac2smiles",
+    "cid": 1289,
+    "split": "iupac2smiles_test",
+    "iupac": "N'-hydroxy-N-[1-(methylamino)-1-oxo-3-phenylpropan-2-yl]-2-(2-methylpropyl)butanediamide",
+    "smiles": "CC(C)CC(CC(=O)NO)C(=O)NC(CC1=CC=CC=C1)C(=O)NC",
+    "question": "Given the IUPAC name 'N'-hydroxy-N-[1-(methylamino)-1-oxo-3-phenylpropan-2-yl]-2-(2-methylpropyl)butanediamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0066",
+    "task_type": "iupac2smiles",
+    "cid": 1218,
+    "split": "iupac2smiles_test",
+    "iupac": "9-chloro-5-phenyl-2,3,4,5-tetrahydro-1H-3-benzazepine-7,8-diol",
+    "smiles": "C1CNCC(C2=CC(=C(C(=C21)Cl)O)O)C3=CC=CC=C3",
+    "question": "Given the IUPAC name '9-chloro-5-phenyl-2,3,4,5-tetrahydro-1H-3-benzazepine-7,8-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0067",
+    "task_type": "iupac2smiles",
+    "cid": 1241,
+    "split": "iupac2smiles_test",
+    "iupac": "5-phenyl-3-prop-2-enyl-1,2,4,5-tetrahydro-3-benzazepine-7,8-diol",
+    "smiles": "C=CCN1CCC2=CC(=C(C=C2C(C1)C3=CC=CC=C3)O)O",
+    "question": "Given the IUPAC name '5-phenyl-3-prop-2-enyl-1,2,4,5-tetrahydro-3-benzazepine-7,8-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0068",
+    "task_type": "iupac2smiles",
+    "cid": 1294,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[chloro(methyl)phosphoryl]oxybutoxybenzene",
+    "smiles": "CCC(COC1=CC=CC=C1)OP(=O)(C)Cl",
+    "question": "Given the IUPAC name '2-[chloro(methyl)phosphoryl]oxybutoxybenzene', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0069",
+    "task_type": "iupac2smiles",
+    "cid": 1184,
+    "split": "iupac2smiles_test",
+    "iupac": "2-methyl-3-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)naphthalene-1,4-dione",
+    "smiles": "CC1=C(C(=O)C2=CC=CC=C2C1=O)CC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)C",
+    "question": "Given the IUPAC name '2-methyl-3-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)naphthalene-1,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0070",
+    "task_type": "iupac2smiles",
+    "cid": 1080,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-(carboxymethylsulfanyl)propanoic acid",
+    "smiles": "C(C(C(=O)O)N)SCC(=O)O",
+    "question": "Given the IUPAC name '2-amino-3-(carboxymethylsulfanyl)propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0071",
+    "task_type": "iupac2smiles",
+    "cid": 1144,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4,5-trihydroxy-6-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C(C1C(C(C(C(O1)OC2C(C(C(C(O2)COP(=O)(O)O)O)O)O)O)O)O)O",
+    "question": "Given the IUPAC name '[3,4,5-trihydroxy-6-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0072",
+    "task_type": "iupac2smiles",
+    "cid": 1269,
+    "split": "iupac2smiles_test",
+    "iupac": "tert-butyl N-[5-benzyl-3-hydroxy-6-[[1-(1H-imidazol-2-yl)-2-methylpropyl]amino]-6-oxo-1-phenylhexan-2-yl]carbamate",
+    "smiles": "CC(C)C(C1=NC=CN1)NC(=O)C(CC2=CC=CC=C2)CC(C(CC3=CC=CC=C3)NC(=O)OC(C)(C)C)O",
+    "question": "Given the IUPAC name 'tert-butyl N-[5-benzyl-3-hydroxy-6-[[1-(1H-imidazol-2-yl)-2-methylpropyl]amino]-6-oxo-1-phenylhexan-2-yl]carbamate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0073",
+    "task_type": "iupac2smiles",
+    "cid": 1045,
+    "split": "iupac2smiles_test",
+    "iupac": "butane-1,4-diamine",
+    "smiles": "C(CCN)CN",
+    "question": "Given the IUPAC name 'butane-1,4-diamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0074",
+    "task_type": "iupac2smiles",
+    "cid": 1265,
+    "split": "iupac2smiles_test",
+    "iupac": "N-[2-[[2-[2-(dimethylamino)ethylcarbamoyl]-1-methylimidazol-4-yl]carbamoyl]-1-methylimidazol-4-yl]-4-formamido-1-methylimidazole-2-carboxamide",
+    "smiles": "CN1C=C(N=C1C(=O)NC2=CN(C(=N2)C(=O)NC3=CN(C(=N3)C(=O)NCCN(C)C)C)C)NC=O",
+    "question": "Given the IUPAC name 'N-[2-[[2-[2-(dimethylamino)ethylcarbamoyl]-1-methylimidazol-4-yl]carbamoyl]-1-methylimidazol-4-yl]-4-formamido-1-methylimidazole-2-carboxamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0075",
+    "task_type": "iupac2smiles",
+    "cid": 1215,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(2,3-dichlorophenyl)ethanamine",
+    "smiles": "CC(C1=C(C(=CC=C1)Cl)Cl)N",
+    "question": "Given the IUPAC name '1-(2,3-dichlorophenyl)ethanamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0076",
+    "task_type": "iupac2smiles",
+    "cid": 1203,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(3,4-dihydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol",
+    "smiles": "C1C(C(OC2=CC(=CC(=C21)O)O)C3=CC(=C(C=C3)O)O)O",
+    "question": "Given the IUPAC name '2-(3,4-dihydroxyphenyl)-3,4-dihydro-2H-chromene-3,5,7-triol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0077",
+    "task_type": "iupac2smiles",
+    "cid": 1237,
+    "split": "iupac2smiles_test",
+    "iupac": "4-(2-amino-1-hydroxyethyl)-2-methoxyphenol",
+    "smiles": "COC1=C(C=CC(=C1)C(CN)O)O",
+    "question": "Given the IUPAC name '4-(2-amino-1-hydroxyethyl)-2-methoxyphenol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0078",
+    "task_type": "iupac2smiles",
+    "cid": 1239,
+    "split": "iupac2smiles_test",
+    "iupac": "2-bromo-N-[2-[4-[[2-hydroxy-3-(1H-indol-4-yloxy)propyl]amino]-4-methylcyclohexyl]propan-2-yl]acetamide",
+    "smiles": "CC1(CCC(CC1)C(C)(C)NC(=O)CBr)NCC(COC2=CC=CC3=C2C=CN3)O",
+    "question": "Given the IUPAC name '2-bromo-N-[2-[4-[[2-hydroxy-3-(1H-indol-4-yloxy)propyl]amino]-4-methylcyclohexyl]propan-2-yl]acetamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0079",
+    "task_type": "iupac2smiles",
+    "cid": 1057,
+    "split": "iupac2smiles_test",
+    "iupac": "benzene-1,2,3-triol",
+    "smiles": "C1=CC(=C(C(=C1)O)O)O",
+    "question": "Given the IUPAC name 'benzene-1,2,3-triol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0080",
+    "task_type": "iupac2smiles",
+    "cid": 1279,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(4-benzylpiperidine-1-carbonyl)-3aH-indole-5-carboximidamide",
+    "smiles": "C1CN(CCC1CC2=CC=CC=C2)C(=O)C3=CC4C=C(C=CC4=N3)C(=N)N",
+    "question": "Given the IUPAC name '2-(4-benzylpiperidine-1-carbonyl)-3aH-indole-5-carboximidamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0081",
+    "task_type": "iupac2smiles",
+    "cid": 1063,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-5-[[(4,5-dihydroxycyclopent-2-en-1-yl)amino]methyl]pyrrolo[2,3-d]pyrimidin-4-one",
+    "smiles": "C1=CC(C(C1NCC2=C3C(=NC(=NC3=O)N)N=C2)O)O",
+    "question": "Given the IUPAC name '2-amino-5-[[(4,5-dihydroxycyclopent-2-en-1-yl)amino]methyl]pyrrolo[2,3-d]pyrimidin-4-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0082",
+    "task_type": "iupac2smiles",
+    "cid": 1041,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl] phosphono hydrogen phosphate",
+    "smiles": "C(C1C(C(C(O1)OP(=O)(O)OP(=O)(O)O)O)O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl] phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0083",
+    "task_type": "iupac2smiles",
+    "cid": 1254,
+    "split": "iupac2smiles_test",
+    "iupac": "5-methyl-2-propan-2-ylcyclohexan-1-ol",
+    "smiles": "CC1CCC(C(C1)O)C(C)C",
+    "question": "Given the IUPAC name '5-methyl-2-propan-2-ylcyclohexan-1-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0084",
+    "task_type": "iupac2smiles",
+    "cid": 1125,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-6-(1,2-dihydroxypropyl)-5,6,7,8-tetrahydro-1H-pteridin-4-one",
+    "smiles": "CC(C(C1CNC2=C(N1)C(=O)N=C(N2)N)O)O",
+    "question": "Given the IUPAC name '2-amino-6-(1,2-dihydroxypropyl)-5,6,7,8-tetrahydro-1H-pteridin-4-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0085",
+    "task_type": "iupac2smiles",
+    "cid": 1217,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-2-(3-hydroxyphenyl)acetic acid",
+    "smiles": "C1=CC(=CC(=C1)O)C(C(=O)O)N",
+    "question": "Given the IUPAC name '2-amino-2-(3-hydroxyphenyl)acetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0086",
+    "task_type": "iupac2smiles",
+    "cid": 1220,
+    "split": "iupac2smiles_test",
+    "iupac": "7-(dipropylamino)-5,6,7,8-tetrahydronaphthalen-1-ol",
+    "smiles": "CCCN(CCC)C1CCC2=C(C1)C(=CC=C2)O",
+    "question": "Given the IUPAC name '7-(dipropylamino)-5,6,7,8-tetrahydronaphthalen-1-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0087",
+    "task_type": "iupac2smiles",
+    "cid": 1073,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl] dihydrogen phosphate",
+    "smiles": "C(C1C(C(C(O1)OP(=O)(O)O)O)O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl] dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0088",
+    "task_type": "iupac2smiles",
+    "cid": 1027,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(3-hydroxy-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta[a]phenanthren-17-yl)ethanone",
+    "smiles": "CC(=O)C1CCC2C1(CCC3C2CC=C4C3(CCC(C4)O)C)C",
+    "question": "Given the IUPAC name '1-(3-hydroxy-10,13-dimethyl-2,3,4,7,8,9,11,12,14,15,16,17-dodecahydro-1H-cyclopenta[a]phenanthren-17-yl)ethanone', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0089",
+    "task_type": "iupac2smiles",
+    "cid": 1228,
+    "split": "iupac2smiles_test",
+    "iupac": "4-(3-phosphonopropyl)piperazine-2-carboxylic acid",
+    "smiles": "C1CN(CC(N1)C(=O)O)CCCP(=O)(O)O",
+    "question": "Given the IUPAC name '4-(3-phosphonopropyl)piperazine-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0090",
+    "task_type": "iupac2smiles",
+    "cid": 1208,
+    "split": "iupac2smiles_test",
+    "iupac": "1,13-dimethyl-10-azatricyclo[7.3.1.02,7]trideca-2(7),3,5-trien-4-ol",
+    "smiles": "CC1C2CC3=C(C1(CCN2)C)C=C(C=C3)O",
+    "question": "Given the IUPAC name '1,13-dimethyl-10-azatricyclo[7.3.1.02,7]trideca-2(7),3,5-trien-4-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0091",
+    "task_type": "iupac2smiles",
+    "cid": 1120,
+    "split": "iupac2smiles_test",
+    "iupac": "3,7,11,15,19,23,27,31,35,39-decamethyltetraconta-2,6,10,14,18,22,26,30,34,38-decaenyl phosphono hydrogen phosphate",
+    "smiles": "CC(=CCCC(=CCCC(=CCCC(=CCCC(=CCCC(=CCCC(=CCCC(=CCCC(=CCCC(=CCOP(=O)(O)OP(=O)(O)O)C)C)C)C)C)C)C)C)C)C",
+    "question": "Given the IUPAC name '3,7,11,15,19,23,27,31,35,39-decamethyltetraconta-2,6,10,14,18,22,26,30,34,38-decaenyl phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0092",
+    "task_type": "iupac2smiles",
+    "cid": 1170,
+    "split": "iupac2smiles_test",
+    "iupac": "[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl] 3-hydroxytetradecanoate",
+    "smiles": "CCCCCCCCCCCC(CC(=O)OC1C(C(OC(C1O)CO)OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)NC(=O)C)O",
+    "question": "Given the IUPAC name '[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl] 3-hydroxytetradecanoate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0093",
+    "task_type": "iupac2smiles",
+    "cid": 1066,
+    "split": "iupac2smiles_test",
+    "iupac": "pyridine-2,3-dicarboxylic acid",
+    "smiles": "C1=CC(=C(N=C1)C(=O)O)C(=O)O",
+    "question": "Given the IUPAC name 'pyridine-2,3-dicarboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0094",
+    "task_type": "iupac2smiles",
+    "cid": 1198,
+    "split": "iupac2smiles_test",
+    "iupac": "1-hydroxypropane-1,2,3-tricarboxylic acid",
+    "smiles": "C(C(C(C(=O)O)O)C(=O)O)C(=O)O",
+    "question": "Given the IUPAC name '1-hydroxypropane-1,2,3-tricarboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0095",
+    "task_type": "iupac2smiles",
+    "cid": 1212,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-2-[4-(2H-tetrazol-5-yl)phenyl]propanoic acid",
+    "smiles": "CC(C1=CC=C(C=C1)C2=NNN=N2)(C(=O)O)N",
+    "question": "Given the IUPAC name '2-amino-2-[4-(2H-tetrazol-5-yl)phenyl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0096",
+    "task_type": "iupac2smiles",
+    "cid": 1248,
+    "split": "iupac2smiles_test",
+    "iupac": "6-(6,6-dimethyl-7,8-dihydro-5H-[1,3]dioxolo[4,5-g]isoquinolin-6-ium-5-yl)-6H-furo[3,4-g][1,3]benzodioxol-8-one",
+    "smiles": "C[N+]1(CCC2=CC3=C(C=C2C1C4C5=C(C6=C(C=C5)OCO6)C(=O)O4)OCO3)C",
+    "question": "Given the IUPAC name '6-(6,6-dimethyl-7,8-dihydro-5H-[1,3]dioxolo[4,5-g]isoquinolin-6-ium-5-yl)-6H-furo[3,4-g][1,3]benzodioxol-8-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0097",
+    "task_type": "iupac2smiles",
+    "cid": 1151,
+    "split": "iupac2smiles_test",
+    "iupac": "[hydroxy-[[3-hydroxy-5-(5-methyl-2,4-dioxopyrimidin-1-yl)oxolan-2-yl]methoxy]phosphoryl] phosphono hydrogen phosphate",
+    "smiles": "CC1=CN(C(=O)NC1=O)C2CC(C(O2)COP(=O)(O)OP(=O)(O)OP(=O)(O)O)O",
+    "question": "Given the IUPAC name '[hydroxy-[[3-hydroxy-5-(5-methyl-2,4-dioxopyrimidin-1-yl)oxolan-2-yl]methoxy]phosphoryl] phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0098",
+    "task_type": "iupac2smiles",
+    "cid": 1177,
+    "split": "iupac2smiles_test",
+    "iupac": "1-[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]pyrimidine-2,4-dione",
+    "smiles": "C1=CN(C(=O)NC1=O)C2C(C(C(O2)CO)O)O",
+    "question": "Given the IUPAC name '1-[3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]pyrimidine-2,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0099",
+    "task_type": "iupac2smiles",
+    "cid": 1101,
+    "split": "iupac2smiles_test",
+    "iupac": "1,3,4,5,6-pentahydroxyhexan-2-one",
+    "smiles": "C(C(C(C(C(=O)CO)O)O)O)O",
+    "question": "Given the IUPAC name '1,3,4,5,6-pentahydroxyhexan-2-one', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0100",
+    "task_type": "iupac2smiles",
+    "cid": 1282,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(1H-benzimidazol-2-ylmethyl)-3H-benzimidazole-5-carboximidamide",
+    "smiles": "C1=CC=C2C(=C1)NC(=N2)CC3=NC4=C(N3)C=C(C=C4)C(=N)N",
+    "question": "Given the IUPAC name '2-(1H-benzimidazol-2-ylmethyl)-3H-benzimidazole-5-carboximidamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0101",
+    "task_type": "iupac2smiles",
+    "cid": 1102,
+    "split": "iupac2smiles_test",
+    "iupac": "N'-(3-aminopropyl)butane-1,4-diamine",
+    "smiles": "C(CCNCCCN)CN",
+    "question": "Given the IUPAC name 'N'-(3-aminopropyl)butane-1,4-diamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0102",
+    "task_type": "iupac2smiles",
+    "cid": 1264,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[[4-[[4-[(4-formamido-1-methylimidazole-2-carbonyl)amino]-1-methylimidazole-2-carbonyl]amino]-1-methylimidazole-2-carbonyl]amino]ethyl-dimethylazanium",
+    "smiles": "CN1C=C(N=C1C(=O)NC2=CN(C(=N2)C(=O)NC3=CN(C(=N3)C(=O)NCC[NH+](C)C)C)C)NC=O",
+    "question": "Given the IUPAC name '2-[[4-[[4-[(4-formamido-1-methylimidazole-2-carbonyl)amino]-1-methylimidazole-2-carbonyl]amino]-1-methylimidazole-2-carbonyl]amino]ethyl-dimethylazanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0103",
+    "task_type": "iupac2smiles",
+    "cid": 1123,
+    "split": "iupac2smiles_test",
+    "iupac": "2-aminoethanesulfonic acid",
+    "smiles": "C(CS(=O)(=O)O)N",
+    "question": "Given the IUPAC name '2-aminoethanesulfonic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0104",
+    "task_type": "iupac2smiles",
+    "cid": 1293,
+    "split": "iupac2smiles_test",
+    "iupac": "N-(1-hydroxypropan-2-yl)icosa-5,8,11,14-tetraenamide",
+    "smiles": "CCCCCC=CCC=CCC=CCC=CCCCC(=O)NC(C)CO",
+    "question": "Given the IUPAC name 'N-(1-hydroxypropan-2-yl)icosa-5,8,11,14-tetraenamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0105",
+    "task_type": "iupac2smiles",
+    "cid": 1233,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-2-(3-oxo-1,2-oxazol-5-yl)acetic acid",
+    "smiles": "C1=C(ONC1=O)C(C(=O)O)N",
+    "question": "Given the IUPAC name '2-amino-2-(3-oxo-1,2-oxazol-5-yl)acetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0106",
+    "task_type": "iupac2smiles",
+    "cid": 1207,
+    "split": "iupac2smiles_test",
+    "iupac": "1-methyl-16-azatetracyclo[7.6.1.02,7.010,15]hexadeca-2,4,6,10,12,14-hexaene",
+    "smiles": "CC12C3=CC=CC=C3CC(N1)C4=CC=CC=C24",
+    "question": "Given the IUPAC name '1-methyl-16-azatetracyclo[7.6.1.02,7.010,15]hexadeca-2,4,6,10,12,14-hexaene', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0107",
+    "task_type": "iupac2smiles",
+    "cid": 1056,
+    "split": "iupac2smiles_test",
+    "iupac": "1,2-dihydropyrimidine",
+    "smiles": "C1NC=CC=N1",
+    "question": "Given the IUPAC name '1,2-dihydropyrimidine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0108",
+    "task_type": "iupac2smiles",
+    "cid": 1262,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4-dihydroxy-5-(4-oxo-1,5-dihydropyrrolo[3,2-d]pyrimidin-7-yl)pyrrolidin-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=C(C2=C(N1)C(=O)N=CN2)C3C(C(C(N3)COP(=O)(O)O)O)O",
+    "question": "Given the IUPAC name '[3,4-dihydroxy-5-(4-oxo-1,5-dihydropyrrolo[3,2-d]pyrimidin-7-yl)pyrrolidin-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0109",
+    "task_type": "iupac2smiles",
+    "cid": 1075,
+    "split": "iupac2smiles_test",
+    "iupac": "[2-[2-[(4-amino-4-carboxybutanoyl)amino]-3-(carboxymethylamino)-3-oxopropyl]sulfanyl-5-[hydroxy(oxo)azaniumyl]phenyl]-hydroxy-oxoazanium",
+    "smiles": "C1=CC(=C(C=C1[N+](=O)O)[N+](=O)O)SCC(C(=O)NCC(=O)O)NC(=O)CCC(C(=O)O)N",
+    "question": "Given the IUPAC name '[2-[2-[(4-amino-4-carboxybutanoyl)amino]-3-(carboxymethylamino)-3-oxopropyl]sulfanyl-5-[hydroxy(oxo)azaniumyl]phenyl]-hydroxy-oxoazanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0110",
+    "task_type": "iupac2smiles",
+    "cid": 1261,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[2-borono-2-[(2-phenylacetyl)amino]ethyl]benzoic acid",
+    "smiles": "B(C(CC1=CC(=CC=C1)C(=O)O)NC(=O)CC2=CC=CC=C2)(O)O",
+    "question": "Given the IUPAC name '3-[2-borono-2-[(2-phenylacetyl)amino]ethyl]benzoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0111",
+    "task_type": "iupac2smiles",
+    "cid": 1104,
+    "split": "iupac2smiles_test",
+    "iupac": "2-aminooctadec-4-ene-1,3-diol",
+    "smiles": "CCCCCCCCCCCCCC=CC(C(CO)N)O",
+    "question": "Given the IUPAC name '2-aminooctadec-4-ene-1,3-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0112",
+    "task_type": "iupac2smiles",
+    "cid": 1225,
+    "split": "iupac2smiles_test",
+    "iupac": "9-chloro-5-phenyl-3-prop-2-enyl-1,2,4,5-tetrahydro-3-benzazepine-7,8-diol",
+    "smiles": "C=CCN1CCC2=C(C(=C(C=C2C(C1)C3=CC=CC=C3)O)O)Cl",
+    "question": "Given the IUPAC name '9-chloro-5-phenyl-3-prop-2-enyl-1,2,4,5-tetrahydro-3-benzazepine-7,8-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0113",
+    "task_type": "iupac2smiles",
+    "cid": 1299,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-(5-fluoro-2,4-dioxopyrimidin-1-yl)propanoic acid",
+    "smiles": "C1=C(C(=O)NC(=O)N1CC(C(=O)O)N)F",
+    "question": "Given the IUPAC name '2-amino-3-(5-fluoro-2,4-dioxopyrimidin-1-yl)propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0114",
+    "task_type": "iupac2smiles",
+    "cid": 1260,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(4-butoxyphenyl)sulfonyl-N-hydroxy-4-(methanesulfonamido)pyrrolidine-2-carboxamide",
+    "smiles": "CCCCOC1=CC=C(C=C1)S(=O)(=O)N2CC(CC2C(=O)NO)NS(=O)(=O)C",
+    "question": "Given the IUPAC name '1-(4-butoxyphenyl)sulfonyl-N-hydroxy-4-(methanesulfonamido)pyrrolidine-2-carboxamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0115",
+    "task_type": "iupac2smiles",
+    "cid": 1002,
+    "split": "iupac2smiles_test",
+    "iupac": "5-phenylimidazolidine-2,4-dione",
+    "smiles": "C1=CC=C(C=C1)C2C(=O)NC(=O)N2",
+    "question": "Given the IUPAC name '5-phenylimidazolidine-2,4-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0116",
+    "task_type": "iupac2smiles",
+    "cid": 1044,
+    "split": "iupac2smiles_test",
+    "iupac": "7H-purine",
+    "smiles": "C1=C2C(=NC=N1)N=CN2",
+    "question": "Given the IUPAC name '7H-purine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0117",
+    "task_type": "iupac2smiles",
+    "cid": 1129,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[[4-[(2-amino-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl)methylamino]benzoyl]amino]pentanedioic acid",
+    "smiles": "C1C(NC2=C(N1)NC(=NC2=O)N)CNC3=CC=C(C=C3)C(=O)NC(CCC(=O)O)C(=O)O",
+    "question": "Given the IUPAC name '2-[[4-[(2-amino-4-oxo-5,6,7,8-tetrahydro-1H-pteridin-6-yl)methylamino]benzoyl]amino]pentanedioic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0118",
+    "task_type": "iupac2smiles",
+    "cid": 1085,
+    "split": "iupac2smiles_test",
+    "iupac": "sulfurothioic S-acid",
+    "smiles": "OS(=O)(=O)S",
+    "question": "Given the IUPAC name 'sulfurothioic S-acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0119",
+    "task_type": "iupac2smiles",
+    "cid": 1018,
+    "split": "iupac2smiles_test",
+    "iupac": "pyridine-2-carboxylic acid",
+    "smiles": "C1=CC=NC(=C1)C(=O)O",
+    "question": "Given the IUPAC name 'pyridine-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0120",
+    "task_type": "iupac2smiles",
+    "cid": 1243,
+    "split": "iupac2smiles_test",
+    "iupac": "8-bromo-3-methyl-5-phenyl-1,2,4,5-tetrahydro-3-benzazepin-7-ol",
+    "smiles": "CN1CCC2=CC(=C(C=C2C(C1)C3=CC=CC=C3)O)Br",
+    "question": "Given the IUPAC name '8-bromo-3-methyl-5-phenyl-1,2,4,5-tetrahydro-3-benzazepin-7-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0121",
+    "task_type": "iupac2smiles",
+    "cid": 1194,
+    "split": "iupac2smiles_test",
+    "iupac": "2,3,4,5-tetrahydropyridine-6-carboxylic acid",
+    "smiles": "C1CCN=C(C1)C(=O)O",
+    "question": "Given the IUPAC name '2,3,4,5-tetrahydropyridine-6-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0122",
+    "task_type": "iupac2smiles",
+    "cid": 1114,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(3-carboxypropanoyl)-6-hydroxycyclohexa-1,3-diene-1-carboxylic acid",
+    "smiles": "C1C=CC(=C(C1O)C(=O)O)C(=O)CCC(=O)O",
+    "question": "Given the IUPAC name '2-(3-carboxypropanoyl)-6-hydroxycyclohexa-1,3-diene-1-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0123",
+    "task_type": "iupac2smiles",
+    "cid": 1092,
+    "split": "iupac2smiles_test",
+    "iupac": "trihydroxy(selanylidene)-lambda5-phosphane",
+    "smiles": "OP(=[Se])(O)O",
+    "question": "Given the IUPAC name 'trihydroxy(selanylidene)-lambda5-phosphane', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0124",
+    "task_type": "iupac2smiles",
+    "cid": 1127,
+    "split": "iupac2smiles_test",
+    "iupac": "thiolane",
+    "smiles": "C1CCSC1",
+    "question": "Given the IUPAC name 'thiolane', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0125",
+    "task_type": "iupac2smiles",
+    "cid": 1137,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(4-methyl-1,3-thiazol-5-yl)ethyl dihydrogen phosphate",
+    "smiles": "CC1=C(SC=N1)CCOP(=O)(O)O",
+    "question": "Given the IUPAC name '2-(4-methyl-1,3-thiazol-5-yl)ethyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0126",
+    "task_type": "iupac2smiles",
+    "cid": 1271,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[amino(carboxy)methyl]cyclopropane-1-carboxylic acid",
+    "smiles": "C1C(C1C(=O)O)C(C(=O)O)N",
+    "question": "Given the IUPAC name '2-[amino(carboxy)methyl]cyclopropane-1-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0127",
+    "task_type": "iupac2smiles",
+    "cid": 1191,
+    "split": "iupac2smiles_test",
+    "iupac": "[[5-(2,6-dioxo-3H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] phosphono hydrogen phosphate",
+    "smiles": "C1=NC2=C(N1C3C(C(C(O3)COP(=O)(O)OP(=O)(O)OP(=O)(O)O)O)O)NC(=O)NC2=O",
+    "question": "Given the IUPAC name '[[5-(2,6-dioxo-3H-purin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0128",
+    "task_type": "iupac2smiles",
+    "cid": 1000,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-1-phenylethanol",
+    "smiles": "C1=CC=C(C=C1)C(CN)O",
+    "question": "Given the IUPAC name '2-amino-1-phenylethanol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0129",
+    "task_type": "iupac2smiles",
+    "cid": 1179,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[7,12,18-tris(2-carboxyethyl)-3,8,13,17-tetrakis(carboxymethyl)-5,10,15,20,21,22,23,24-octahydroporphyrin-2-yl]propanoic acid",
+    "smiles": "C1C2=C(C(=C(N2)CC3=C(C(=C(N3)CC4=C(C(=C(N4)CC5=C(C(=C1N5)CCC(=O)O)CC(=O)O)CC(=O)O)CCC(=O)O)CC(=O)O)CCC(=O)O)CC(=O)O)CCC(=O)O",
+    "question": "Given the IUPAC name '3-[7,12,18-tris(2-carboxyethyl)-3,8,13,17-tetrakis(carboxymethyl)-5,10,15,20,21,22,23,24-octahydroporphyrin-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0130",
+    "task_type": "iupac2smiles",
+    "cid": 1235,
+    "split": "iupac2smiles_test",
+    "iupac": "1,13-dimethyl-10-prop-2-enyl-10-azatricyclo[7.3.1.02,7]trideca-2(7),3,5-trien-4-ol",
+    "smiles": "CC1C2CC3=C(C1(CCN2CC=C)C)C=C(C=C3)O",
+    "question": "Given the IUPAC name '1,13-dimethyl-10-prop-2-enyl-10-azatricyclo[7.3.1.02,7]trideca-2(7),3,5-trien-4-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0131",
+    "task_type": "iupac2smiles",
+    "cid": 1109,
+    "split": "iupac2smiles_test",
+    "iupac": "1-hydroxy-1lambda6-thiirane 1-oxide",
+    "smiles": "C1CS1(=O)O",
+    "question": "Given the IUPAC name '1-hydroxy-1lambda6-thiirane 1-oxide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0132",
+    "task_type": "iupac2smiles",
+    "cid": 1014,
+    "split": "iupac2smiles_test",
+    "iupac": "trimethyl(2-phosphonooxyethyl)azanium",
+    "smiles": "C[N+](C)(C)CCOP(=O)(O)O",
+    "question": "Given the IUPAC name 'trimethyl(2-phosphonooxyethyl)azanium', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0133",
+    "task_type": "iupac2smiles",
+    "cid": 1153,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-(4-hydroxyphenyl)propanoic acid",
+    "smiles": "C1=CC(=CC=C1CC(C(=O)O)N)O",
+    "question": "Given the IUPAC name '2-amino-3-(4-hydroxyphenyl)propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0134",
+    "task_type": "iupac2smiles",
+    "cid": 1048,
+    "split": "iupac2smiles_test",
+    "iupac": "1H-pyrazole",
+    "smiles": "C1=CNN=C1",
+    "question": "Given the IUPAC name '1H-pyrazole', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0135",
+    "task_type": "iupac2smiles",
+    "cid": 1219,
+    "split": "iupac2smiles_test",
+    "iupac": "7-(dipropylamino)-5,6,7,8-tetrahydronaphthalen-2-ol",
+    "smiles": "CCCN(CCC)C1CCC2=C(C1)C=C(C=C2)O",
+    "question": "Given the IUPAC name '7-(dipropylamino)-5,6,7,8-tetrahydronaphthalen-2-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0136",
+    "task_type": "iupac2smiles",
+    "cid": 1024,
+    "split": "iupac2smiles_test",
+    "iupac": "4,5-dioxo-1H-pyrrolo[2,3-f]quinoline-2,7,9-tricarboxylic acid",
+    "smiles": "C1=C(C2=C(C(=O)C(=O)C3=C2NC(=C3)C(=O)O)N=C1C(=O)O)C(=O)O",
+    "question": "Given the IUPAC name '4,5-dioxo-1H-pyrrolo[2,3-f]quinoline-2,7,9-tricarboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0137",
+    "task_type": "iupac2smiles",
+    "cid": 1169,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxypropanoic acid",
+    "smiles": "CC(C(=O)O)OC1C(C(OC(C1O)CO)OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)NC(=O)C",
+    "question": "Given the IUPAC name '2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxypropanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0138",
+    "task_type": "iupac2smiles",
+    "cid": 1020,
+    "split": "iupac2smiles_test",
+    "iupac": "7-methylocta-2,6-dienyl phosphono hydrogen phosphate",
+    "smiles": "CC(=CCCC=CCOP(=O)(O)OP(=O)(O)O)C",
+    "question": "Given the IUPAC name '7-methylocta-2,6-dienyl phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0139",
+    "task_type": "iupac2smiles",
+    "cid": 1061,
+    "split": "iupac2smiles_test",
+    "iupac": "phosphate",
+    "smiles": "[O-]P(=O)([O-])[O-]",
+    "question": "Given the IUPAC name 'phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0140",
+    "task_type": "iupac2smiles",
+    "cid": 1143,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(hydroxymethyl)-6-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxane-3,4,5-triol",
+    "smiles": "C(C1C(C(C(C(O1)OC2C(C(C(C(O2)CO)O)O)O)O)O)O)O",
+    "question": "Given the IUPAC name '2-(hydroxymethyl)-6-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxane-3,4,5-triol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0141",
+    "task_type": "iupac2smiles",
+    "cid": 1285,
+    "split": "iupac2smiles_test",
+    "iupac": "6,14-dimethyl-3-methylidene-2-oxo-3a,4,5,8,9,12,13,15a-octahydrocyclotetradeca[b]furan-10-carboxylic acid",
+    "smiles": "CC1=CCCC(=CCCC(=CC2C(CC1)C(=C)C(=O)O2)C)C(=O)O",
+    "question": "Given the IUPAC name '6,14-dimethyl-3-methylidene-2-oxo-3a,4,5,8,9,12,13,15a-octahydrocyclotetradeca[b]furan-10-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0142",
+    "task_type": "iupac2smiles",
+    "cid": 1115,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[3,4-dihydroxy-2,5-bis(hydroxymethyl)oxolan-2-yl]oxy-6-(hydroxymethyl)oxane-3,4,5-triol",
+    "smiles": "C(C1C(C(C(C(O1)OC2(C(C(C(O2)CO)O)O)CO)O)O)O)O",
+    "question": "Given the IUPAC name '2-[3,4-dihydroxy-2,5-bis(hydroxymethyl)oxolan-2-yl]oxy-6-(hydroxymethyl)oxane-3,4,5-triol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0143",
+    "task_type": "iupac2smiles",
+    "cid": 1292,
+    "split": "iupac2smiles_test",
+    "iupac": "2-hydroxy-2-phenylacetic acid",
+    "smiles": "C1=CC=C(C=C1)C(C(=O)O)O",
+    "question": "Given the IUPAC name '2-hydroxy-2-phenylacetic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0144",
+    "task_type": "iupac2smiles",
+    "cid": 1098,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[8,13,18-tris(2-carboxyethyl)-3,7,12,17-tetrakis(carboxymethyl)-7,12-dimethyl-2,8,13,19,20,22-hexahydroporphyrin-2-yl]propanoic acid",
+    "smiles": "CC1(C(C2=CC3=NC(=CC4=NC(CC5=NC(=C(C5CCC(=O)O)CC(=O)O)C=C1N2)C(=C4CC(=O)O)CCC(=O)O)C(C3(C)CC(=O)O)CCC(=O)O)CCC(=O)O)CC(=O)O",
+    "question": "Given the IUPAC name '3-[8,13,18-tris(2-carboxyethyl)-3,7,12,17-tetrakis(carboxymethyl)-7,12-dimethyl-2,8,13,19,20,22-hexahydroporphyrin-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0145",
+    "task_type": "iupac2smiles",
+    "cid": 1113,
+    "split": "iupac2smiles_test",
+    "iupac": "4-[[2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-4-hydroxybutanoic acid",
+    "smiles": "CC1=C(SC=[N+]1CC2=CN=C(N=C2N)C)CCOP(=O)(O)OP(=O)(O)OC(CCC(=O)O)O",
+    "question": "Given the IUPAC name '4-[[2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-4-hydroxybutanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0146",
+    "task_type": "iupac2smiles",
+    "cid": 1158,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl phosphono hydrogen phosphate",
+    "smiles": "C1=CN(C(=O)NC1=O)C2C(C(C(O2)COP(=O)(O)OP(=O)(O)O)O)O",
+    "question": "Given the IUPAC name '[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0147",
+    "task_type": "iupac2smiles",
+    "cid": 1084,
+    "split": "iupac2smiles_test",
+    "iupac": "dioxido-oxo-sulfanylidene-lambda6-sulfane",
+    "smiles": "[O-]S(=O)(=S)[O-]",
+    "question": "Given the IUPAC name 'dioxido-oxo-sulfanylidene-lambda6-sulfane', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0148",
+    "task_type": "iupac2smiles",
+    "cid": 1065,
+    "split": "iupac2smiles_test",
+    "iupac": "(5-ethenyl-1-azabicyclo[2.2.2]octan-2-yl)-(6-methoxyquinolin-4-yl)methanol",
+    "smiles": "COC1=CC2=C(C=CN=C2C=C1)C(C3CC4CCN3CC4C=C)O",
+    "question": "Given the IUPAC name '(5-ethenyl-1-azabicyclo[2.2.2]octan-2-yl)-(6-methoxyquinolin-4-yl)methanol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0149",
+    "task_type": "iupac2smiles",
+    "cid": 1067,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[[4-carboxy-4-[2-[hydroxy-[2,3,4-trihydroxy-5-(8-hydroxy-2,4-dioxo-1,5,5a,6,7,8,9,9a-octahydropyrimido[4,5-b]quinolin-10-yl)pentoxy]phosphoryl]oxypropanoylamino]butanoyl]amino]pentanedioic acid",
+    "smiles": "CC(C(=O)NC(CCC(=O)NC(CCC(=O)O)C(=O)O)C(=O)O)OP(=O)(O)OCC(C(C(CN1C2CC(CCC2CC3=C1NC(=O)NC3=O)O)O)O)O",
+    "question": "Given the IUPAC name '2-[[4-carboxy-4-[2-[hydroxy-[2,3,4-trihydroxy-5-(8-hydroxy-2,4-dioxo-1,5,5a,6,7,8,9,9a-octahydropyrimido[4,5-b]quinolin-10-yl)pentoxy]phosphoryl]oxypropanoylamino]butanoyl]amino]pentanedioic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0150",
+    "task_type": "iupac2smiles",
+    "cid": 1069,
+    "split": "iupac2smiles_test",
+    "iupac": "2-methyl-3-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)-1,4-dihydronaphthalene-1,4-diol",
+    "smiles": "CC1=C(C(C2=CC=CC=C2C1O)O)CC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)CCC=C(C)C",
+    "question": "Given the IUPAC name '2-methyl-3-(3,7,11,15,19,23,27,31-octamethyldotriaconta-2,6,10,14,18,22,26,30-octaenyl)-1,4-dihydronaphthalene-1,4-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0151",
+    "task_type": "iupac2smiles",
+    "cid": 1016,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-phosphonooxybutanoic acid",
+    "smiles": "CC(C(C(=O)O)N)OP(=O)(O)O",
+    "question": "Given the IUPAC name '2-amino-3-phosphonooxybutanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0152",
+    "task_type": "iupac2smiles",
+    "cid": 1094,
+    "split": "iupac2smiles_test",
+    "iupac": "3,4,5-trihydroxycyclohexene-1-carboxylic acid",
+    "smiles": "C1C(C(C(C=C1C(=O)O)O)O)O",
+    "question": "Given the IUPAC name '3,4,5-trihydroxycyclohexene-1-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0153",
+    "task_type": "iupac2smiles",
+    "cid": 1040,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[18-(2-carboxyethyl)-7,12-bis(ethenyl)-3,8,13,17-tetramethyl-3,12,13,21-tetrahydroporphyrin-2-yl]propanoic acid",
+    "smiles": "CC1C(C2=NC1=CC3=NC(=CC4=C(C(C(=CC5=NC(=C2)C(=C5C=C)C)N4)C)CCC(=O)O)C(=C3C)CCC(=O)O)C=C",
+    "question": "Given the IUPAC name '3-[18-(2-carboxyethyl)-7,12-bis(ethenyl)-3,8,13,17-tetramethyl-3,12,13,21-tetrahydroporphyrin-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0154",
+    "task_type": "iupac2smiles",
+    "cid": 1038,
+    "split": "iupac2smiles_test",
+    "iupac": "hydron",
+    "smiles": "[H+]",
+    "question": "Given the IUPAC name 'hydron', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0155",
+    "task_type": "iupac2smiles",
+    "cid": 1008,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-[6-amino-1-[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl]purin-1-ium-9-yl]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C1=NC2=C(N1C3C(C(C(O3)COP(=O)(O)O)O)O)N=C[N+](=C2N)C4C(C(C(O4)COP(=O)(O)O)O)O",
+    "question": "Given the IUPAC name '[5-[6-amino-1-[3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl]purin-1-ium-9-yl]-3,4-dihydroxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0156",
+    "task_type": "iupac2smiles",
+    "cid": 1148,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-(1H-indol-3-yl)propanoic acid",
+    "smiles": "C1=CC=C2C(=C1)C(=CN2)CC(C(=O)O)N",
+    "question": "Given the IUPAC name '2-amino-3-(1H-indol-3-yl)propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0157",
+    "task_type": "iupac2smiles",
+    "cid": 1136,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(4-methyl-1,3-thiazol-5-yl)ethanol",
+    "smiles": "CC1=C(SC=N1)CCO",
+    "question": "Given the IUPAC name '2-(4-methyl-1,3-thiazol-5-yl)ethanol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0158",
+    "task_type": "iupac2smiles",
+    "cid": 1055,
+    "split": "iupac2smiles_test",
+    "iupac": "[5-hydroxy-4-(hydroxymethyl)-6-methyl-3-pyridinyl]methyl dihydrogen phosphate",
+    "smiles": "CC1=NC=C(C(=C1O)CO)COP(=O)(O)O",
+    "question": "Given the IUPAC name '[5-hydroxy-4-(hydroxymethyl)-6-methyl-3-pyridinyl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0159",
+    "task_type": "iupac2smiles",
+    "cid": 1183,
+    "split": "iupac2smiles_test",
+    "iupac": "4-hydroxy-3-methoxybenzaldehyde",
+    "smiles": "COC1=C(C=CC(=C1)C=O)O",
+    "question": "Given the IUPAC name '4-hydroxy-3-methoxybenzaldehyde', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0160",
+    "task_type": "iupac2smiles",
+    "cid": 1145,
+    "split": "iupac2smiles_test",
+    "iupac": "N,N-dimethylmethanamine oxide",
+    "smiles": "C[N+](C)(C)[O-]",
+    "question": "Given the IUPAC name 'N,N-dimethylmethanamine oxide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0161",
+    "task_type": "iupac2smiles",
+    "cid": 1298,
+    "split": "iupac2smiles_test",
+    "iupac": "propan-2-yl 7-methoxy-2-(methylsulfanylmethyl)-3-sulfanyl-2H-quinoxaline-1-carboxylate",
+    "smiles": "CC(C)OC(=O)N1C(C(=NC2=C1C=C(C=C2)OC)S)CSC",
+    "question": "Given the IUPAC name 'propan-2-yl 7-methoxy-2-(methylsulfanylmethyl)-3-sulfanyl-2H-quinoxaline-1-carboxylate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0162",
+    "task_type": "iupac2smiles",
+    "cid": 1076,
+    "split": "iupac2smiles_test",
+    "iupac": "S-(8-amino-8-oxo-1-sulfanyloctan-3-yl) ethanethioate",
+    "smiles": "CC(=O)SC(CCCCC(=O)N)CCS",
+    "question": "Given the IUPAC name 'S-(8-amino-8-oxo-1-sulfanyloctan-3-yl) ethanethioate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0163",
+    "task_type": "iupac2smiles",
+    "cid": 1231,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[6-(4-chlorophenoxy)hexyl]oxirane-2-carboxylic acid",
+    "smiles": "C1C(O1)(CCCCCCOC2=CC=C(C=C2)Cl)C(=O)O",
+    "question": "Given the IUPAC name '2-[6-(4-chlorophenoxy)hexyl]oxirane-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0164",
+    "task_type": "iupac2smiles",
+    "cid": 1043,
+    "split": "iupac2smiles_test",
+    "iupac": "pteridine",
+    "smiles": "C1=CN=C2C(=N1)C=NC=N2",
+    "question": "Given the IUPAC name 'pteridine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0165",
+    "task_type": "iupac2smiles",
+    "cid": 1083,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-5-[[1-(carboxymethylamino)-3-(2-hydroxypropanoylsulfanyl)-1-oxopropan-2-yl]amino]-5-oxopentanoic acid",
+    "smiles": "CC(C(=O)SCC(C(=O)NCC(=O)O)NC(=O)CCC(C(=O)O)N)O",
+    "question": "Given the IUPAC name '2-amino-5-[[1-(carboxymethylamino)-3-(2-hydroxypropanoylsulfanyl)-1-oxopropan-2-yl]amino]-5-oxopentanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0166",
+    "task_type": "iupac2smiles",
+    "cid": 1195,
+    "split": "iupac2smiles_test",
+    "iupac": "3-methylbut-3-enyl phosphono hydrogen phosphate",
+    "smiles": "CC(=C)CCOP(=O)(O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '3-methylbut-3-enyl phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0167",
+    "task_type": "iupac2smiles",
+    "cid": 1029,
+    "split": "iupac2smiles_test",
+    "iupac": "2,6-diamino-5-hydroxyhexanoic acid",
+    "smiles": "C(CC(C(=O)O)N)C(CN)O",
+    "question": "Given the IUPAC name '2,6-diamino-5-hydroxyhexanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0168",
+    "task_type": "iupac2smiles",
+    "cid": 1103,
+    "split": "iupac2smiles_test",
+    "iupac": "N,N'-bis(3-aminopropyl)butane-1,4-diamine",
+    "smiles": "C(CCNCCCN)CNCCCN",
+    "question": "Given the IUPAC name 'N,N'-bis(3-aminopropyl)butane-1,4-diamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0169",
+    "task_type": "iupac2smiles",
+    "cid": 1081,
+    "split": "iupac2smiles_test",
+    "iupac": "2-hydroxy-2-methylbutanedioic acid",
+    "smiles": "CC(CC(=O)O)(C(=O)O)O",
+    "question": "Given the IUPAC name '2-hydroxy-2-methylbutanedioic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0170",
+    "task_type": "iupac2smiles",
+    "cid": 1097,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[7,13,17-tris(2-carboxyethyl)-3,8,12,18-tetrakis(carboxymethyl)-12,18-dimethyl-1,2,3,8,9,13,17,21,22,24-decahydroporphyrin-2-yl]propanoic acid",
+    "smiles": "CC1(C(C2=CC3=NC(=CC4C(C(=C(N4)C=C5C(C(C(N5)C=C1N2)CCC(=O)O)CC(=O)O)CCC(=O)O)CC(=O)O)C(C3CCC(=O)O)(C)CC(=O)O)CCC(=O)O)CC(=O)O",
+    "question": "Given the IUPAC name '3-[7,13,17-tris(2-carboxyethyl)-3,8,12,18-tetrakis(carboxymethyl)-12,18-dimethyl-1,2,3,8,9,13,17,21,22,24-decahydroporphyrin-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0171",
+    "task_type": "iupac2smiles",
+    "cid": 1034,
+    "split": "iupac2smiles_test",
+    "iupac": "phosphono propanoate",
+    "smiles": "CCC(=O)OP(=O)(O)O",
+    "question": "Given the IUPAC name 'phosphono propanoate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0172",
+    "task_type": "iupac2smiles",
+    "cid": 1291,
+    "split": "iupac2smiles_test",
+    "iupac": "4-(ethylamino)-2-(2-methoxyethyl)-1,1-dioxo-3,4-dihydrothieno[3,2-e]thiazine-6-sulfonamide",
+    "smiles": "CCNC1CN(S(=O)(=O)C2=C1C=C(S2)S(=O)(=O)N)CCOC",
+    "question": "Given the IUPAC name '4-(ethylamino)-2-(2-methoxyethyl)-1,1-dioxo-3,4-dihydrothieno[3,2-e]thiazine-6-sulfonamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0173",
+    "task_type": "iupac2smiles",
+    "cid": 1132,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethyl phosphono hydrogen phosphate",
+    "smiles": "CC1=C(SC=[N+]1CC2=CN=C(N=C2N)C)CCOP(=O)(O)OP(=O)(O)O",
+    "question": "Given the IUPAC name '2-[3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-4-methyl-1,3-thiazol-3-ium-5-yl]ethyl phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0174",
+    "task_type": "iupac2smiles",
+    "cid": 1062,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(3,7-dimethylocta-2,6-dienyl)-5,6-dimethoxy-3-methylbenzene-1,4-diol",
+    "smiles": "CC1=C(C(=C(C(=C1O)OC)OC)O)CC=C(C)CCC=C(C)C",
+    "question": "Given the IUPAC name '2-(3,7-dimethylocta-2,6-dienyl)-5,6-dimethoxy-3-methylbenzene-1,4-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0175",
+    "task_type": "iupac2smiles",
+    "cid": 1116,
+    "split": "iupac2smiles_test",
+    "iupac": "[3,4-dihydroxy-5-(hydroxymethyl)-5-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxolan-2-yl]methyl dihydrogen phosphate",
+    "smiles": "C(C1C(C(C(C(O1)OC2(C(C(C(O2)COP(=O)(O)O)O)O)CO)O)O)O)O",
+    "question": "Given the IUPAC name '[3,4-dihydroxy-5-(hydroxymethyl)-5-[3,4,5-trihydroxy-6-(hydroxymethyl)oxan-2-yl]oxyoxolan-2-yl]methyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0176",
+    "task_type": "iupac2smiles",
+    "cid": 1059,
+    "split": "iupac2smiles_test",
+    "iupac": "4-hydroxy-3,4-dihydro-2H-pyrrole-2-carboxylic acid",
+    "smiles": "C1C(C=NC1C(=O)O)O",
+    "question": "Given the IUPAC name '4-hydroxy-3,4-dihydro-2H-pyrrole-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0177",
+    "task_type": "iupac2smiles",
+    "cid": 1037,
+    "split": "iupac2smiles_test",
+    "iupac": "3-[18-(2-carboxyethyl)-7,12-bis(ethenyl)-3,8,13,17-tetramethyl-2,3,6,7,8,11,12,13,14,17,21,22,23,24-tetradecahydroporphyrin-2-yl]propanoic acid",
+    "smiles": "CC1C2C=C3C(C(=C(N3)C=C4C(C(C(=CC5C(C(C(=CC(C1C=C)N2)N5)C)C=C)N4)C)CCC(=O)O)CCC(=O)O)C",
+    "question": "Given the IUPAC name '3-[18-(2-carboxyethyl)-7,12-bis(ethenyl)-3,8,13,17-tetramethyl-2,3,6,7,8,11,12,13,14,17,21,22,23,24-tetradecahydroporphyrin-2-yl]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0178",
+    "task_type": "iupac2smiles",
+    "cid": 1047,
+    "split": "iupac2smiles_test",
+    "iupac": "pyrazine-2-carboxylic acid",
+    "smiles": "C1=CN=C(C=N1)C(=O)O",
+    "question": "Given the IUPAC name 'pyrazine-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0179",
+    "task_type": "iupac2smiles",
+    "cid": 1182,
+    "split": "iupac2smiles_test",
+    "iupac": "2-amino-3-methylbutanoic acid",
+    "smiles": "CC(C)C(C(=O)O)N",
+    "question": "Given the IUPAC name '2-amino-3-methylbutanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0180",
+    "task_type": "iupac2smiles",
+    "cid": 1244,
+    "split": "iupac2smiles_test",
+    "iupac": "5-ethyl-5-pentan-2-yl-2-sulfanyl-1H-pyrimidine-4,6-dione",
+    "smiles": "CCCC(C)C1(C(=O)NC(=NC1=O)S)CC",
+    "question": "Given the IUPAC name '5-ethyl-5-pentan-2-yl-2-sulfanyl-1H-pyrimidine-4,6-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0181",
+    "task_type": "iupac2smiles",
+    "cid": 1213,
+    "split": "iupac2smiles_test",
+    "iupac": "4,8a-dimethyl-1,2,3,4,5,6,7,8-octahydronaphthalen-4a-ol",
+    "smiles": "CC1CCCC2(C1(CCCC2)O)C",
+    "question": "Given the IUPAC name '4,8a-dimethyl-1,2,3,4,5,6,7,8-octahydronaphthalen-4a-ol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0182",
+    "task_type": "iupac2smiles",
+    "cid": 1167,
+    "split": "iupac2smiles_test",
+    "iupac": "[3-acetamido-4,5-dihydroxy-6-(hydroxymethyl)oxan-2-yl] [[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] hydrogen phosphate",
+    "smiles": "CC(=O)NC1C(C(C(OC1OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)CO)O)O",
+    "question": "Given the IUPAC name '[3-acetamido-4,5-dihydroxy-6-(hydroxymethyl)oxan-2-yl] [[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0183",
+    "task_type": "iupac2smiles",
+    "cid": 1297,
+    "split": "iupac2smiles_test",
+    "iupac": "4-[amino(carboxy)methyl]-2-hydroxybenzoic acid",
+    "smiles": "C1=CC(=C(C=C1C(C(=O)O)N)O)C(=O)O",
+    "question": "Given the IUPAC name '4-[amino(carboxy)methyl]-2-hydroxybenzoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0184",
+    "task_type": "iupac2smiles",
+    "cid": 1122,
+    "split": "iupac2smiles_test",
+    "iupac": "2-hydroxy-3-oxopropanoic acid",
+    "smiles": "C(=O)C(C(=O)O)O",
+    "question": "Given the IUPAC name '2-hydroxy-3-oxopropanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0185",
+    "task_type": "iupac2smiles",
+    "cid": 1185,
+    "split": "iupac2smiles_test",
+    "iupac": "hydroxyphosphinate",
+    "smiles": "OP(=O)[O-]",
+    "question": "Given the IUPAC name 'hydroxyphosphinate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0186",
+    "task_type": "iupac2smiles",
+    "cid": 1296,
+    "split": "iupac2smiles_test",
+    "iupac": "2-(3-methoxyphenyl)-4-(methylamino)-1,1-dioxo-3,4-dihydrothieno[3,2-e]thiazine-6-sulfonamide",
+    "smiles": "CNC1CN(S(=O)(=O)C2=C1C=C(S2)S(=O)(=O)N)C3=CC(=CC=C3)OC",
+    "question": "Given the IUPAC name '2-(3-methoxyphenyl)-4-(methylamino)-1,1-dioxo-3,4-dihydrothieno[3,2-e]thiazine-6-sulfonamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0187",
+    "task_type": "iupac2smiles",
+    "cid": 1188,
+    "split": "iupac2smiles_test",
+    "iupac": "3,7-dihydropurine-2,6-dione",
+    "smiles": "C1=NC2=C(N1)C(=O)NC(=O)N2",
+    "question": "Given the IUPAC name '3,7-dihydropurine-2,6-dione', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0188",
+    "task_type": "iupac2smiles",
+    "cid": 1015,
+    "split": "iupac2smiles_test",
+    "iupac": "2-aminoethyl dihydrogen phosphate",
+    "smiles": "C(COP(=O)(O)O)N",
+    "question": "Given the IUPAC name '2-aminoethyl dihydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0189",
+    "task_type": "iupac2smiles",
+    "cid": 1267,
+    "split": "iupac2smiles_test",
+    "iupac": "31-oxo-20-oxa-2,6,11,13-tetrazahexacyclo[19.6.2.12,5.115,19.09,13.024,28]hentriaconta-1(27),9,11,15(30),16,18,21(29),22,24(28),25-decaene-18-carbonitrile",
+    "smiles": "C1CN2C3=CC=CC4=C3C=C(C=C4)OC5=C(C=CC(=C5)CN6C=NC=C6CCNC1C2=O)C#N",
+    "question": "Given the IUPAC name '31-oxo-20-oxa-2,6,11,13-tetrazahexacyclo[19.6.2.12,5.115,19.09,13.024,28]hentriaconta-1(27),9,11,15(30),16,18,21(29),22,24(28),25-decaene-18-carbonitrile', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0190",
+    "task_type": "iupac2smiles",
+    "cid": 1030,
+    "split": "iupac2smiles_test",
+    "iupac": "propane-1,2-diol",
+    "smiles": "CC(CO)O",
+    "question": "Given the IUPAC name 'propane-1,2-diol', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0191",
+    "task_type": "iupac2smiles",
+    "cid": 1238,
+    "split": "iupac2smiles_test",
+    "iupac": "1-(3-chloro-5,6-dihydrobenzo[b][1]benzothiepin-5-yl)-4-methylpiperazine",
+    "smiles": "CN1CCN(CC1)C2CC3=CC=CC=C3SC4=C2C=C(C=C4)Cl",
+    "question": "Given the IUPAC name '1-(3-chloro-5,6-dihydrobenzo[b][1]benzothiepin-5-yl)-4-methylpiperazine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0192",
+    "task_type": "iupac2smiles",
+    "cid": 1275,
+    "split": "iupac2smiles_test",
+    "iupac": "N-[4-(methanesulfonamido)-1,4-dioxobutan-2-yl]-1-[3-methyl-2-(naphthalene-2-carbonylamino)butanoyl]pyrrolidine-2-carboxamide",
+    "smiles": "CC(C)C(C(=O)N1CCCC1C(=O)NC(CC(=O)NS(=O)(=O)C)C=O)NC(=O)C2=CC3=CC=CC=C3C=C2",
+    "question": "Given the IUPAC name 'N-[4-(methanesulfonamido)-1,4-dioxobutan-2-yl]-1-[3-methyl-2-(naphthalene-2-carbonylamino)butanoyl]pyrrolidine-2-carboxamide', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0193",
+    "task_type": "iupac2smiles",
+    "cid": 1176,
+    "split": "iupac2smiles_test",
+    "iupac": "urea",
+    "smiles": "C(=O)(N)N",
+    "question": "Given the IUPAC name 'urea', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0194",
+    "task_type": "iupac2smiles",
+    "cid": 1163,
+    "split": "iupac2smiles_test",
+    "iupac": "2-[2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxypropanoylamino]propanoic acid",
+    "smiles": "CC(C(=O)O)NC(=O)C(C)OC1C(C(OC(C1O)CO)OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)NC(=O)C",
+    "question": "Given the IUPAC name '2-[2-[3-acetamido-2-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-5-hydroxy-6-(hydroxymethyl)oxan-4-yl]oxypropanoylamino]propanoic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0195",
+    "task_type": "iupac2smiles",
+    "cid": 1181,
+    "split": "iupac2smiles_test",
+    "iupac": "[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] phosphono hydrogen phosphate",
+    "smiles": "C1=CN(C(=O)NC1=O)C2C(C(C(O2)COP(=O)(O)OP(=O)(O)OP(=O)(O)O)O)O",
+    "question": "Given the IUPAC name '[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] phosphono hydrogen phosphate', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0196",
+    "task_type": "iupac2smiles",
+    "cid": 1146,
+    "split": "iupac2smiles_test",
+    "iupac": "N,N-dimethylmethanamine",
+    "smiles": "CN(C)C",
+    "question": "Given the IUPAC name 'N,N-dimethylmethanamine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0197",
+    "task_type": "iupac2smiles",
+    "cid": 1168,
+    "split": "iupac2smiles_test",
+    "iupac": "5-acetamido-6-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-3,4-dihydroxyoxane-2-carboxylic acid",
+    "smiles": "CC(=O)NC1C(C(C(OC1OP(=O)(O)OP(=O)(O)OCC2C(C(C(O2)N3C=CC(=O)NC3=O)O)O)C(=O)O)O)O",
+    "question": "Given the IUPAC name '5-acetamido-6-[[[5-(2,4-dioxopyrimidin-1-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl]oxy-hydroxyphosphoryl]oxy-3,4-dihydroxyoxane-2-carboxylic acid', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0198",
+    "task_type": "iupac2smiles",
+    "cid": 1295,
+    "split": "iupac2smiles_test",
+    "iupac": "2-benzhydrylpyrrolidine",
+    "smiles": "C1CC(NC1)C(C2=CC=CC=C2)C3=CC=CC=C3",
+    "question": "Given the IUPAC name '2-benzhydrylpyrrolidine', provide the SMILES representation."
+  },
+  {
+    "task_id": "iupac2smiles_test_0199",
+    "task_type": "iupac2smiles",
+    "cid": 1226,
+    "split": "iupac2smiles_test",
+    "iupac": "piperidine-2,3-dicarboxylic acid",
+    "smiles": "C1CC(C(NC1)C(=O)O)C(=O)O",
+    "question": "Given the IUPAC name 'piperidine-2,3-dicarboxylic acid', provide the SMILES representation."
+  }
+]

@@ -5,7 +5,7 @@ import os
 from openai import AsyncOpenAI
 from openreward import AsyncOpenReward
 
-MODEL_NAME = os.environ.get("MODEL_NAME", "gpt-5.2")
+MODEL_NAME = os.environ.get("MODEL_NAME", "gpt-4o")
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
 
