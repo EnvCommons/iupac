@@ -10,7 +10,9 @@ Validation:
 - IUPAC: gpt-5-mini grader (flexible matching for nomenclature variations)
 """
 
+import asyncio
 import json
+import re
 from pathlib import Path
 from typing import List, Literal
 
@@ -27,6 +29,10 @@ if os.path.exists("/orwd_data"):
     ENV_PATH = Path("/orwd_data")
 else:
     ENV_PATH = Path(__file__).parent
+
+
+class GradingError(RuntimeError):
+    """Raised when an answer's correctness cannot be established."""
 
 # =============================================================================
 # Module-Level Data Loading
@@ -83,9 +89,10 @@ Given SMILES: {smiles}
 Reference IUPAC: {reference_iupac}
 Predicted IUPAC: {predicted_iupac}
 
-Provide 2-3 sentences of analysis comparing the names, then conclude with:
-- "CORRECT" if the names refer to the same chemical structure
-- "INCORRECT" if they refer to different structures or if the predicted name is invalid
+Provide 2-3 sentences of analysis comparing the names, then give your verdict
+inside <answer></answer> tags containing exactly CORRECT or INCORRECT:
+- <answer>CORRECT</answer> if the names refer to the same chemical structure
+- <answer>INCORRECT</answer> if they refer to different structures or if the predicted name is invalid
 """
 
 
@@ -206,44 +213,62 @@ class IUPAC(Environment):
         - CCO == OCC (ethanol - equivalent)
         - Preserves R/S and E/Z stereochemistry for chiral molecules
         """
+        # Parse and canonicalize predicted SMILES
+        pred_mol = Chem.MolFromSmiles(predicted_smiles.strip())
+        if pred_mol is None:
+            return ToolOutput(
+                blocks=[TextBlock(
+                    text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string."
+                )],
+                metadata={
+                    "error": "Invalid SMILES",
+                    "predicted": predicted_smiles,
+                    "task_type": "iupac2smiles"
+                },
+                reward=0.0,
+                finished=True
+            )
+
+        # Canonicalize with stereochemistry preservation (following ether0 benchmark)
         try:
-            # Parse and canonicalize predicted SMILES
-            pred_mol = Chem.MolFromSmiles(predicted_smiles.strip())
-            if pred_mol is None:
-                return ToolOutput(
-                    blocks=[TextBlock(
-                        text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string."
-                    )],
-                    metadata={
-                        "error": "Invalid SMILES",
-                        "predicted": predicted_smiles,
-                        "task_type": "iupac2smiles"
-                    },
-                    reward=0.0,
-                    finished=True
-                )
-
-            # Canonicalize with stereochemistry preservation (following ether0 benchmark)
             pred_canonical = Chem.MolToSmiles(pred_mol, canonical=True, isomericSmiles=True)
+        except Exception as e:
+            return ToolOutput(
+                blocks=[TextBlock(
+                    text=f"❌ Invalid SMILES. Your answer parsed but could not be canonicalized: {str(e)}"
+                )],
+                metadata={
+                    "error": f"Uncanonicalizable SMILES: {str(e)}",
+                    "predicted": predicted_smiles,
+                    "task_type": "iupac2smiles"
+                },
+                reward=0.0,
+                finished=True
+            )
 
-            # Canonicalize expected SMILES
-            expected_mol = Chem.MolFromSmiles(self.answer_data["smiles"])
-            expected_canonical = Chem.MolToSmiles(expected_mol, canonical=True, isomericSmiles=True)
+        # Canonicalize expected SMILES
+        expected_mol = Chem.MolFromSmiles(self.answer_data["smiles"])
+        if expected_mol is None:
+            raise GradingError(
+                f"Reference SMILES for cid {self.validated.cid} could not be parsed: "
+                f"{self.answer_data['smiles']!r}"
+            )
+        expected_canonical = Chem.MolToSmiles(expected_mol, canonical=True, isomericSmiles=True)
 
-            # Compare canonical forms
-            is_correct = (pred_canonical == expected_canonical)
-            reward = 1.0 if is_correct else 0.0
+        # Compare canonical forms
+        is_correct = (pred_canonical == expected_canonical)
+        reward = 1.0 if is_correct else 0.0
 
-            # Generate feedback
-            if is_correct:
-                feedback = f"""✅ Correct!
+        # Generate feedback
+        if is_correct:
+            feedback = f"""✅ Correct!
 
 Your answer: {predicted_smiles}
 Canonical form: {pred_canonical}
 
 This is the correct SMILES representation for the given IUPAC name."""
-            else:
-                feedback = f"""❌ Incorrect.
+        else:
+            feedback = f"""❌ Incorrect.
 
 Your answer: {predicted_smiles}
 Your canonical SMILES: {pred_canonical}
@@ -252,31 +277,19 @@ Expected canonical SMILES: {expected_canonical}
 
 The structures do not match. Please try again."""
 
-            return ToolOutput(
-                blocks=[TextBlock(text=feedback)],
-                metadata={
-                    "predicted": predicted_smiles,
-                    "predicted_canonical": pred_canonical,
-                    "expected_canonical": expected_canonical,
-                    "correct": is_correct,
-                    "task_type": "iupac2smiles",
-                    "cid": self.validated.cid
-                },
-                reward=reward,
-                finished=True
-            )
-
-        except Exception as e:
-            return ToolOutput(
-                blocks=[TextBlock(text=f"❌ Error processing SMILES: {str(e)}")],
-                metadata={
-                    "error": str(e),
-                    "predicted": predicted_smiles,
-                    "task_type": "iupac2smiles"
-                },
-                reward=0.0,
-                finished=True
-            )
+        return ToolOutput(
+            blocks=[TextBlock(text=feedback)],
+            metadata={
+                "predicted": predicted_smiles,
+                "predicted_canonical": pred_canonical,
+                "expected_canonical": expected_canonical,
+                "correct": is_correct,
+                "task_type": "iupac2smiles",
+                "cid": self.validated.cid
+            },
+            reward=reward,
+            finished=True
+        )
 
     # =========================================================================
     # IUPAC Validation (LLM Grader)
@@ -299,52 +312,69 @@ The structures do not match. Please try again."""
             predicted_iupac=predicted_iupac
         )
 
-        try:
-            # Call OpenAI API with gpt-5-mini
-            response = await self.client.chat.completions.create(
-                model="gpt-5-mini",
-                messages=[{"role": "user", "content": grader_prompt}],
-                stream=False
+        grading_response = await self._call_grader(grader_prompt)
+
+        verdicts = re.findall(
+            r"<answer>\s*(INCORRECT|CORRECT)\s*</answer>",
+            grading_response,
+            re.IGNORECASE
+        )
+        if not verdicts:
+            raise GradingError(
+                "IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict: "
+                f"{grading_response!r}"
             )
 
-            grading_response = response.choices[0].message.content or ""
-            upper_response = grading_response.upper()
+        is_correct = verdicts[-1].upper() == "CORRECT"
+        reward = 1.0 if is_correct else 0.0
 
-            # Parse verdict: "CORRECT" must be present AND "INCORRECT" must NOT be present
-            is_correct = "CORRECT" in upper_response and "INCORRECT" not in upper_response
-            reward = 1.0 if is_correct else 0.0
-
-            # Format feedback for agent
-            result_label = "✅ Correct" if is_correct else "❌ Incorrect"
-            feedback = f"""{grading_response}
+        # Format feedback for agent
+        result_label = "✅ Correct" if is_correct else "❌ Incorrect"
+        feedback = f"""{grading_response}
 
 {result_label}
 
 Reference IUPAC name: {self.answer_data["iupac"]}
 Your answer: {predicted_iupac}"""
 
-            return ToolOutput(
-                blocks=[TextBlock(text=feedback)],
-                metadata={
-                    "predicted": predicted_iupac,
-                    "expected": self.answer_data["iupac"],
-                    "correct": is_correct,
-                    "grading_response": grading_response,
-                    "task_type": "smiles2iupac",
-                    "cid": self.validated.cid
-                },
-                reward=reward,
-                finished=True
-            )
+        return ToolOutput(
+            blocks=[TextBlock(text=feedback)],
+            metadata={
+                "predicted": predicted_iupac,
+                "expected": self.answer_data["iupac"],
+                "correct": is_correct,
+                "grading_response": grading_response,
+                "task_type": "smiles2iupac",
+                "cid": self.validated.cid
+            },
+            reward=reward,
+            finished=True
+        )
 
-        except Exception as e:
-            return ToolOutput(
-                blocks=[TextBlock(text=f"❌ Grading error: {str(e)}")],
-                metadata={
-                    "error": str(e),
-                    "predicted": predicted_iupac,
-                    "task_type": "smiles2iupac"
-                },
-                reward=0.0,
-                finished=True
-            )
+    async def _call_grader(self, grader_prompt: str, max_attempts: int = 4) -> str:
+        """Call the grader with exponential backoff, re-raising if it never lands.
+
+        After ``max_attempts`` the last exception propagates so the SDK turns it
+        into ToolFailed, rather than the failure being swallowed into a
+        fabricated reward.
+        """
+        last_exc: Exception | None = None
+        for attempt in range(max_attempts):
+            try:
+                response = await self.client.chat.completions.create(
+                    model="gpt-5-mini",
+                    messages=[{"role": "user", "content": grader_prompt}],
+                    stream=False
+                )
+                return response.choices[0].message.content or ""
+            except Exception as e:
+                last_exc = e
+                if attempt < max_attempts - 1:
+                    wait = min(2 ** attempt, 30)
+                    print(
+                        f"GRADER API ERROR: gpt-5-mini | {e} | retry in {wait}s "
+                        f"(attempt {attempt + 1}/{max_attempts})"
+                    )
+                    await asyncio.sleep(wait)
+        assert last_exc is not None
+        raise last_exc
