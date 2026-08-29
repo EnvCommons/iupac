@@ -31,6 +31,11 @@ else:
     ENV_PATH = Path(__file__).parent
 
 
+# Reward for a submission made after the task has already been graded. Negative
+# so repeat submissions are actively discouraged, not merely left unscored.
+REPEAT_SUBMISSION_PENALTY = -0.1
+
+
 class GradingError(RuntimeError):
     """Raised when an answer's correctness cannot be established."""
 
@@ -153,6 +158,12 @@ class IUPAC(Environment):
             )
         self.client = openai.AsyncClient(api_key=api_key)
 
+        # Graded submissions this session. Only the first is rewarded: both task
+        # types report the reference answer back (the expected canonical SMILES on
+        # an incorrect answer, the reference IUPAC name always), so an uncapped
+        # tool would let the agent read it and resubmit.
+        self.submitted = 0
+
     @classmethod
     def list_splits(cls) -> list[Split]:
         """Return all available splits."""
@@ -191,10 +202,29 @@ class IUPAC(Environment):
         This tool validates your answer and returns reward + feedback.
         The episode ends after calling this tool (finished=True).
         """
+        if self.submitted > 0:
+            return ToolOutput(
+                blocks=[TextBlock(text="An answer has already been submitted for this task. "
+                                       "This episode is over: it is not re-graded, and repeat "
+                                       "submissions are penalised (reward -0.1).")],
+                metadata={"task_id": self.validated.task_id, "already_submitted": True,
+                          "submission_count": self.submitted},
+                reward=REPEAT_SUBMISSION_PENALTY,
+                finished=True,
+            )
+
         if self.validated.task_type == "iupac2smiles":
-            return await self._validate_smiles(params.answer)
+            result = await self._validate_smiles(params.answer)
         else:  # smiles2iupac
-            return await self._validate_iupac(params.answer)
+            result = await self._validate_iupac(params.answer)
+
+        # Only a call that actually compared against the reference counts. An
+        # unparseable SMILES returns early with an "error" and never reached the
+        # comparison, so it stays retryable rather than burning the attempt; a
+        # GradingError propagates and never gets here at all.
+        if not (result.metadata or {}).get("error"):
+            self.submitted += 1
+        return result
 
     # =========================================================================
     # SMILES Validation (Deterministic with RDKit)
