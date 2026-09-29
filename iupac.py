@@ -281,10 +281,10 @@ class IUPAC(Environment):
         # Canonicalize expected SMILES
         expected_mol = Chem.MolFromSmiles(self.answer_data["smiles"])
         if expected_mol is None:
-            raise GradingError(
-                f"Reference SMILES for cid {self.validated.cid} could not be parsed: "
-                f"{self.answer_data['smiles']!r}"
-            )
+            # Exception messages reach the agent, so the reference is only logged.
+            print(f"GRADING ERROR: reference SMILES for cid {self.validated.cid} could not be "
+                  f"parsed: {self.answer_data['smiles']!r}")
+            raise GradingError(f"Reference SMILES for cid {self.validated.cid} could not be parsed")
         expected_canonical = Chem.MolToSmiles(expected_mol, canonical=True, isomericSmiles=True)
 
         # Compare canonical forms
@@ -349,10 +349,10 @@ The structures do not match."""
             re.IGNORECASE
         )
         if not verdicts:
-            raise GradingError(
-                "IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict: "
-                f"{grading_response!r}"
-            )
+            # Exception messages reach the agent and the grader's response
+            # discusses the reference name, so the response is only logged.
+            print(f"GRADING ERROR: IUPAC grader returned no verdict: {grading_response!r}")
+            raise GradingError("IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict")
 
         is_correct = verdicts[-1].upper() == "CORRECT"
         reward = 1.0 if is_correct else 0.0
