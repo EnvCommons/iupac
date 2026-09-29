@@ -81,6 +81,9 @@ print(f"Loaded {len(ANSWERS)} IUPAC tasks across {len(ALL_TASKS)} splits")
 # Grader Template
 # =============================================================================
 
+# Uncapped, a looping thinking trace on the served judge ran for up to 40 min and stalled a shared replica.
+GRADER_MAX_TOKENS = 16384
+
 IUPAC_GRADER_TEMPLATE = """You are a chemistry expert evaluating IUPAC nomenclature.
 
 Determine if the predicted IUPAC name is chemically equivalent to the reference.
@@ -156,7 +159,8 @@ class IUPAC(Environment):
                 "OpenAI API key required for IUPAC grading. "
                 "Pass via secrets={'openai_api_key': '...'}"
             )
-        self.client = openai.AsyncClient(api_key=api_key)
+        # _call_grader retries itself; SDK retries on top would leave more abandoned generations running upstream.
+        self.client = openai.AsyncClient(api_key=api_key, max_retries=0)
 
         # Graded submissions this session. Only the first is rewarded, so the
         # agent cannot turn repeated submissions into a search against the grader.
@@ -389,6 +393,7 @@ Your answer: {predicted_iupac}"""
                 response = await self.client.chat.completions.create(
                     model="gpt-5-mini",
                     messages=[{"role": "user", "content": grader_prompt}],
+                    max_completion_tokens=GRADER_MAX_TOKENS,
                     stream=False
                 )
                 return response.choices[0].message.content or ""
