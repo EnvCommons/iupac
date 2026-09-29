@@ -67,18 +67,19 @@ async def test_task(environment, task, ground_truth, task_type: str, api_key: st
 
 
 async def test_invalid_then_gold(environment, task, ground_truth, api_key: str):
-    """An unparseable SMILES is not graded and keeps the episode open; the gold answer after it is graded."""
+    """An unparseable or empty SMILES is not graded and keeps the episode open; the gold answer after it is graded."""
     task_id = task.task_spec.get("task_id") if hasattr(task, 'task_spec') else str(task)
 
     async with environment.session(task=task, secrets={"OPENAI_API_KEY": api_key}) as session:
         await session.get_prompt()
 
-        invalid_result = await session.call_tool("submit_answer", {"answer": "C1CC(("})
-        assert invalid_result.reward == 0.0 and not invalid_result.finished, (
-            f"Expected an ungraded, unfinished result for invalid SMILES, got "
-            f"reward={invalid_result.reward} finished={invalid_result.finished}\n"
-            f"Task: {task_id}"
-        )
+        for invalid in ("C1CC((", ""):
+            invalid_result = await session.call_tool("submit_answer", {"answer": invalid})
+            assert invalid_result.reward == 0.0 and not invalid_result.finished, (
+                f"Expected an ungraded, unfinished result for invalid SMILES {invalid!r}, got "
+                f"reward={invalid_result.reward} finished={invalid_result.finished}\n"
+                f"Task: {task_id}"
+            )
 
         answer = ground_truth["smiles"]
         tool_result = await session.call_tool("submit_answer", {"answer": answer})

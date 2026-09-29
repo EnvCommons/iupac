@@ -245,7 +245,8 @@ class IUPAC(Environment):
         """
         # Parse and canonicalize predicted SMILES
         pred_mol = Chem.MolFromSmiles(predicted_smiles.strip())
-        if pred_mol is None:
+        # An empty string parses to a molecule with no atoms: not an answer either.
+        if pred_mol is None or pred_mol.GetNumAtoms() == 0:
             return ToolOutput(
                 blocks=[TextBlock(
                     text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string. "
