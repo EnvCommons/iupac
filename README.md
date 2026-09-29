@@ -40,7 +40,7 @@ This is a single-turn environment with two validation strategies:
 
 **IUPAC Validation (LLM Grader)**: Uses gpt-5-mini for flexible name matching, handling nomenclature variations (e.g., "propan-1-ol" equals "1-propanol").
 
-Reward is binary: 1.0 if correct, 0.0 if incorrect.
+Reward is binary: 1.0 if correct, 0.0 if incorrect. For iupac2smiles, a SMILES that cannot be parsed or canonicalized is not graded: it returns reward 0.0 and the episode stays open so the agent can resubmit.
 
 ## Data
 
@@ -50,7 +50,7 @@ Data consists of JSON files containing compounds sourced from PubChem via their 
 
 | Tool | Description |
 |------|-------------|
-| `submit_answer` | Submit SMILES string or IUPAC name. Ends the episode. |
+| `submit_answer` | Submit SMILES string or IUPAC name. Ends the episode once an answer is graded. |
 
 ## Time Horizon
 

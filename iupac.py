@@ -158,10 +158,8 @@ class IUPAC(Environment):
             )
         self.client = openai.AsyncClient(api_key=api_key)
 
-        # Graded submissions this session. Only the first is rewarded: both task
-        # types report the reference answer back (the expected canonical SMILES on
-        # an incorrect answer, the reference IUPAC name always), so an uncapped
-        # tool would let the agent read it and resubmit.
+        # Graded submissions this session. Only the first is rewarded, so the
+        # agent cannot turn repeated submissions into a search against the grader.
         self.submitted = 0
 
     @classmethod
@@ -200,7 +198,9 @@ class IUPAC(Environment):
         For smiles2iupac tasks: Provide an IUPAC name
 
         This tool validates your answer and returns reward + feedback.
-        The episode ends after calling this tool (finished=True).
+        The episode ends after calling this tool (finished=True), unless a
+        SMILES answer cannot be parsed or canonicalized, in which case it is
+        not graded and you may resubmit.
         """
         if self.submitted > 0:
             return ToolOutput(
@@ -219,9 +219,9 @@ class IUPAC(Environment):
             result = await self._validate_iupac(params.answer)
 
         # Only a call that actually compared against the reference counts. An
-        # unparseable SMILES returns early with an "error" and never reached the
-        # comparison, so it stays retryable rather than burning the attempt; a
-        # GradingError propagates and never gets here at all.
+        # unparseable SMILES returns early with an "error" and finished=False and
+        # never reached the comparison, so it neither burns the attempt nor ends
+        # the episode; a GradingError propagates and never gets here at all.
         if not (result.metadata or {}).get("error"):
             self.submitted += 1
         return result
@@ -248,7 +248,8 @@ class IUPAC(Environment):
         if pred_mol is None:
             return ToolOutput(
                 blocks=[TextBlock(
-                    text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string."
+                    text="❌ Invalid SMILES format. Your answer could not be parsed as a valid SMILES string. "
+                         "It was not graded; submit a corrected SMILES."
                 )],
                 metadata={
                     "error": "Invalid SMILES",
@@ -256,7 +257,7 @@ class IUPAC(Environment):
                     "task_type": "iupac2smiles"
                 },
                 reward=0.0,
-                finished=True
+                finished=False
             )
 
         # Canonicalize with stereochemistry preservation (following ether0 benchmark)
@@ -265,7 +266,8 @@ class IUPAC(Environment):
         except Exception as e:
             return ToolOutput(
                 blocks=[TextBlock(
-                    text=f"❌ Invalid SMILES. Your answer parsed but could not be canonicalized: {str(e)}"
+                    text=f"❌ Invalid SMILES. Your answer parsed but could not be canonicalized: {str(e)}. "
+                         "It was not graded; submit a corrected SMILES."
                 )],
                 metadata={
                     "error": f"Uncanonicalizable SMILES: {str(e)}",
@@ -273,7 +275,7 @@ class IUPAC(Environment):
                     "task_type": "iupac2smiles"
                 },
                 reward=0.0,
-                finished=True
+                finished=False
             )
 
         # Canonicalize expected SMILES
@@ -303,16 +305,13 @@ This is the correct SMILES representation for the given IUPAC name."""
 Your answer: {predicted_smiles}
 Your canonical SMILES: {pred_canonical}
 
-Expected canonical SMILES: {expected_canonical}
-
-The structures do not match. Please try again."""
+The structures do not match."""
 
         return ToolOutput(
             blocks=[TextBlock(text=feedback)],
             metadata={
                 "predicted": predicted_smiles,
                 "predicted_canonical": pred_canonical,
-                "expected_canonical": expected_canonical,
                 "correct": is_correct,
                 "task_type": "iupac2smiles",
                 "cid": self.validated.cid
@@ -360,20 +359,15 @@ The structures do not match. Please try again."""
 
         # Format feedback for agent
         result_label = "✅ Correct" if is_correct else "❌ Incorrect"
-        feedback = f"""{grading_response}
+        feedback = f"""{result_label}
 
-{result_label}
-
-Reference IUPAC name: {self.answer_data["iupac"]}
 Your answer: {predicted_iupac}"""
 
         return ToolOutput(
             blocks=[TextBlock(text=feedback)],
             metadata={
                 "predicted": predicted_iupac,
-                "expected": self.answer_data["iupac"],
                 "correct": is_correct,
-                "grading_response": grading_response,
                 "task_type": "smiles2iupac",
                 "cid": self.validated.cid
             },

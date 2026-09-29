@@ -66,6 +66,37 @@ async def test_task(environment, task, ground_truth, task_type: str, api_key: st
         }
 
 
+async def test_invalid_then_gold(environment, task, ground_truth, api_key: str):
+    """An unparseable SMILES is not graded and keeps the episode open; the gold answer after it is graded."""
+    task_id = task.task_spec.get("task_id") if hasattr(task, 'task_spec') else str(task)
+
+    async with environment.session(task=task, secrets={"OPENAI_API_KEY": api_key}) as session:
+        await session.get_prompt()
+
+        invalid_result = await session.call_tool("submit_answer", {"answer": "C1CC(("})
+        assert invalid_result.reward == 0.0 and not invalid_result.finished, (
+            f"Expected an ungraded, unfinished result for invalid SMILES, got "
+            f"reward={invalid_result.reward} finished={invalid_result.finished}\n"
+            f"Task: {task_id}"
+        )
+
+        answer = ground_truth["smiles"]
+        tool_result = await session.call_tool("submit_answer", {"answer": answer})
+        assert tool_result.reward == 1.0 and tool_result.finished, (
+            f"Expected reward 1.0 and finished for ground truth after invalid SMILES, got "
+            f"reward={tool_result.reward} finished={tool_result.finished}\n"
+            f"Task: {task_id}"
+        )
+
+        return {
+            "task_id": task_id,
+            "task_type": "iupac2smiles",
+            "answer": answer,
+            "reward": tool_result.reward,
+            "passed": True
+        }
+
+
 async def main() -> None:
     """Run golden tests on first 5 examples of each task type."""
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -142,6 +173,25 @@ async def main() -> None:
                     "passed": False,
                     "error": str(e)
                 })
+
+    print(f"\n{'='*70}")
+    print("Testing invalid SMILES then ground truth (iupac2smiles_test[0])")
+    print(f"{'='*70}\n")
+    split = "iupac2smiles_test"
+    ground_truth_data = await load_ground_truth(split)
+    tasks = await environment.list_tasks(split=split)
+    task_id = tasks[0].task_spec.get("task_id") if hasattr(tasks[0], 'task_spec') else f"{split}_0"
+    try:
+        result = await test_invalid_then_gold(environment, tasks[0], ground_truth_data[0], api_key or "")
+        results.append(result)
+        print(f"  ✅ PASSED - Reward: {result['reward']:.1f}")
+    except AssertionError as e:
+        print(f"  ❌ FAILED")
+        print(f"     {e}")
+        results.append({"task_id": task_id, "task_type": "iupac2smiles", "passed": False, "error": str(e)})
+    except Exception as e:
+        print(f"  ❌ ERROR: {e}")
+        results.append({"task_id": task_id, "task_type": "iupac2smiles", "passed": False, "error": str(e)})
 
     # Summary
     print(f"\n{'='*70}")
