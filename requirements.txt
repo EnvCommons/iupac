@@ -1,4 +1,4 @@
-fastapi>=0.115.12
+fastapi>=0.115.12,<0.142
 openreward>=0.1.160
 openai
 rdkit
