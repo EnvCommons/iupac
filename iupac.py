@@ -83,6 +83,8 @@ print(f"Loaded {len(ANSWERS)} IUPAC tasks across {len(ALL_TASKS)} splits")
 
 # Uncapped, a looping thinking trace on the served judge ran for up to 40 min and stalled a shared replica.
 GRADER_MAX_TOKENS = 16384
+# A capped reasoning trace can end without a verdict; such replies are re-sampled this many times.
+GRADER_VERDICT_ATTEMPTS = 3
 
 IUPAC_GRADER_TEMPLATE = """You are a chemistry expert evaluating IUPAC nomenclature.
 
@@ -203,8 +205,8 @@ class IUPAC(Environment):
 
         This tool validates your answer and returns reward + feedback.
         The episode ends after calling this tool (finished=True), unless a
-        SMILES answer cannot be parsed or canonicalized, in which case it is
-        not graded and you may resubmit.
+        SMILES answer cannot be parsed or canonicalized or the answer is empty,
+        in which case it is not graded and you may resubmit.
         """
         if self.submitted > 0:
             return ToolOutput(
@@ -223,9 +225,10 @@ class IUPAC(Environment):
             result = await self._validate_iupac(params.answer)
 
         # Only a call that actually compared against the reference counts. An
-        # unparseable SMILES returns early with an "error" and finished=False and
-        # never reached the comparison, so it neither burns the attempt nor ends
-        # the episode; a GradingError propagates and never gets here at all.
+        # unparseable SMILES or an empty answer returns early with an "error" and
+        # finished=False and never reached the comparison, so it neither burns the
+        # attempt nor ends the episode; a GradingError propagates and never gets
+        # here at all.
         if not (result.metadata or {}).get("error"):
             self.submitted += 1
         return result
@@ -340,23 +343,35 @@ The structures do not match."""
         - "propan-1-ol" == "1-propanol" (equivalent)
         - "dimethyl" == "di-methyl" (equivalent)
         """
+        if not predicted_iupac.strip():
+            return ToolOutput(
+                blocks=[TextBlock(text="❌ Empty answer. It was not graded; submit an IUPAC name.")],
+                metadata={"error": "Empty answer", "predicted": predicted_iupac, "task_type": "smiles2iupac"},
+                reward=0.0,
+                finished=False
+            )
+
         grader_prompt = IUPAC_GRADER_TEMPLATE.format(
             smiles=self.answer_data["smiles"],
             reference_iupac=self.answer_data["iupac"],
             predicted_iupac=predicted_iupac
         )
 
-        grading_response = await self._call_grader(grader_prompt)
-
-        verdicts = re.findall(
-            r"<answer>\s*(INCORRECT|CORRECT)\s*</answer>",
-            grading_response,
-            re.IGNORECASE
-        )
-        if not verdicts:
+        verdicts: list[str] = []
+        for attempt in range(GRADER_VERDICT_ATTEMPTS):
+            grading_response = await self._call_grader(grader_prompt)
+            verdicts = re.findall(
+                r"<answer>\s*(INCORRECT|CORRECT)\s*</answer>",
+                grading_response,
+                re.IGNORECASE
+            )
+            if verdicts:
+                break
             # Exception messages reach the agent and the grader's response
             # discusses the reference name, so the response is only logged.
-            print(f"GRADING ERROR: IUPAC grader returned no verdict: {grading_response!r}")
+            print(f"GRADING ERROR: IUPAC grader returned no verdict "
+                  f"(attempt {attempt + 1}/{GRADER_VERDICT_ATTEMPTS}): {grading_response!r}")
+        if not verdicts:
             raise GradingError("IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict")
 
         is_correct = verdicts[-1].upper() == "CORRECT"
