@@ -7,10 +7,12 @@ Bidirectional chemistry task environment with two task types:
 
 Validation:
 - SMILES: RDKit canonical comparison with stereochemistry (ether0 benchmark standard)
-- IUPAC: gpt-5-mini grader (flexible matching for nomenclature variations)
+- IUPAC: OPSIN parses the name to a structure, compared with RDKit ignoring
+  stereochemistry; names OPSIN cannot parse go to a gpt-5-mini grader
 """
 
 import asyncio
+import importlib.util
 import json
 import re
 from pathlib import Path
@@ -38,6 +40,60 @@ REPEAT_SUBMISSION_PENALTY = -0.1
 
 class GradingError(RuntimeError):
     """Raised when an answer's correctness cannot be established."""
+
+
+# OPSIN (Open Parser for Systematic IUPAC Nomenclature) as shipped in the pinned py2opsin package.
+# It is run directly so names go over stdin rather than through py2opsin's shared temp file.
+OPSIN_JAR = (Path(importlib.util.find_spec("py2opsin").origin).parent
+             / "opsin-cli-2.9.0-jar-with-dependencies.jar")
+if not OPSIN_JAR.exists():
+    raise FileNotFoundError(f"OPSIN jar not found at {OPSIN_JAR}")
+OPSIN_TIMEOUT_S = 60
+# Each OPSIN call is a short-lived JVM of ~120 MB RSS; this bounds how many run at once.
+_OPSIN_SLOTS = asyncio.Semaphore(4)
+
+
+async def opsin_to_smiles(names: list[str]) -> list[str | None]:
+    """Parse IUPAC names with OPSIN; None for a name it cannot parse.
+
+    Whitespace runs (including newlines) are collapsed so each name is exactly one
+    input line. Stereodescriptors OPSIN cannot interpret are ignored (-s), since
+    structures are compared without stereochemistry. A timeout counts as unparsed.
+    """
+    lines = "".join(" ".join(name.split()) + "\n" for name in names).encode()
+    async with _OPSIN_SLOTS:
+        proc = await asyncio.create_subprocess_exec(
+            "java", "-Xmx256m", "-XX:+UseSerialGC", "-XX:TieredStopAtLevel=1",
+            "-Dfile.encoding=UTF-8", "-jar", str(OPSIN_JAR), "-osmi", "-s",
+            stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        try:
+            out, err = await asyncio.wait_for(proc.communicate(lines), OPSIN_TIMEOUT_S)
+        except asyncio.TimeoutError:
+            proc.kill()
+            await proc.wait()
+            print(f"OPSIN timed out after {OPSIN_TIMEOUT_S}s; treating the names as unparsed")
+            return [None] * len(names)
+    # OPSIN prints one line per input name, empty when the name cannot be parsed.
+    smiles = out.decode("utf-8", "replace").split("\n")[:len(names)]
+    if proc.returncode != 0 or len(smiles) != len(names):
+        print(f"GRADING ERROR: OPSIN exited {proc.returncode}: {err.decode('utf-8', 'replace')[-2000:]}")
+        raise GradingError(f"OPSIN failed (exit code {proc.returncode})")
+    return [s.strip() or None for s in smiles]
+
+
+def canonical_smiles_without_stereo(smiles: str | None) -> str | None:
+    """RDKit canonical SMILES with stereochemistry removed; None if it does not parse.
+
+    Charges, explicit hydrogens (so tautomers) and isotopes are kept, as in the
+    iupac2smiles comparison.
+    """
+    mol = Chem.MolFromSmiles(smiles) if smiles else None
+    if mol is None or mol.GetNumAtoms() == 0:
+        return None
+    Chem.RemoveStereochemistry(mol)
+    return Chem.MolToSmiles(mol, canonical=True, isomericSmiles=True)
 
 # =============================================================================
 # Module-Level Data Loading
@@ -141,7 +197,8 @@ class IUPAC(Environment):
 
     Validation:
     - SMILES answers validated using RDKit canonicalization
-    - IUPAC answers validated using gpt-5-mini grader
+    - IUPAC answers parsed by OPSIN and compared as structures without
+      stereochemistry; names OPSIN cannot parse go to a gpt-5-mini grader
     """
 
     def __init__(self, task_spec: JSONObject, secrets: dict[str, str] = {}):
@@ -329,19 +386,19 @@ The structures do not match."""
         )
 
     # =========================================================================
-    # IUPAC Validation (LLM Grader)
+    # IUPAC Validation (OPSIN, then LLM Grader)
     # =========================================================================
 
     async def _validate_iupac(self, predicted_iupac: str) -> ToolOutput:
         """
-        Validate IUPAC name using gpt-5-mini grader.
+        Validate an IUPAC name by the structure it denotes.
 
-        This provides flexible validation for IUPAC nomenclature variations.
-        The LLM grader understands chemical equivalence despite formatting differences.
-
-        Examples:
-        - "propan-1-ol" == "1-propanol" (equivalent)
-        - "dimethyl" == "di-methyl" (equivalent)
+        OPSIN parses the name; the structure is compared with the reference SMILES
+        by RDKit canonical SMILES without stereochemistry, so equivalent names
+        (alternative numbering, von Baeyer vs fused nomenclature, substituent
+        order) are graded alike. A name OPSIN cannot parse goes to the gpt-5-mini
+        grader, as does a non-matching name on a task whose reference name OPSIN
+        itself reads as a different structure.
         """
         if not predicted_iupac.strip():
             return ToolOutput(
@@ -351,6 +408,45 @@ The structures do not match."""
                 finished=False
             )
 
+        # None when RDKit rejects the reference SMILES (e.g. a hypervalent atom);
+        # such a task cannot be compared structurally and is left to the LLM grader.
+        reference = canonical_smiles_without_stereo(self.answer_data["smiles"])
+        predicted_smiles, reference_name_smiles = await opsin_to_smiles(
+            [predicted_iupac, self.answer_data["iupac"]])
+        predicted = canonical_smiles_without_stereo(predicted_smiles)
+        reference_name = canonical_smiles_without_stereo(reference_name_smiles)
+        # OPSIN's "different structure" is not trusted where it reads the
+        # reference name itself as a structure other than the reference SMILES.
+        if reference is not None and predicted is not None and (
+                predicted == reference or reference_name in (None, reference)):
+            is_correct = predicted == reference
+            graded_by = "opsin"
+        else:
+            is_correct = await self._grade_with_llm(predicted_iupac)
+            graded_by = "llm"
+        reward = 1.0 if is_correct else 0.0
+
+        # Format feedback for agent
+        result_label = "✅ Correct" if is_correct else "❌ Incorrect"
+        feedback = f"""{result_label}
+
+Your answer: {predicted_iupac}"""
+
+        return ToolOutput(
+            blocks=[TextBlock(text=feedback)],
+            metadata={
+                "predicted": predicted_iupac,
+                "correct": is_correct,
+                "graded_by": graded_by,
+                "task_type": "smiles2iupac",
+                "cid": self.validated.cid
+            },
+            reward=reward,
+            finished=True
+        )
+
+    async def _grade_with_llm(self, predicted_iupac: str) -> bool:
+        """Ask the gpt-5-mini grader whether the name matches the reference name."""
         grader_prompt = IUPAC_GRADER_TEMPLATE.format(
             smiles=self.answer_data["smiles"],
             reference_iupac=self.answer_data["iupac"],
@@ -373,27 +469,7 @@ The structures do not match."""
                   f"(attempt {attempt + 1}/{GRADER_VERDICT_ATTEMPTS}): {grading_response!r}")
         if not verdicts:
             raise GradingError("IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict")
-
-        is_correct = verdicts[-1].upper() == "CORRECT"
-        reward = 1.0 if is_correct else 0.0
-
-        # Format feedback for agent
-        result_label = "✅ Correct" if is_correct else "❌ Incorrect"
-        feedback = f"""{result_label}
-
-Your answer: {predicted_iupac}"""
-
-        return ToolOutput(
-            blocks=[TextBlock(text=feedback)],
-            metadata={
-                "predicted": predicted_iupac,
-                "correct": is_correct,
-                "task_type": "smiles2iupac",
-                "cid": self.validated.cid
-            },
-            reward=reward,
-            finished=True
-        )
+        return verdicts[-1].upper() == "CORRECT"
 
     async def _call_grader(self, grader_prompt: str, max_attempts: int = 4) -> str:
         """Call the grader with exponential backoff, re-raising if it never lands.

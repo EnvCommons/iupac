@@ -1,6 +1,7 @@
 fastapi>=0.115.12,<0.142
 openreward>=0.1.160
 openai
+py2opsin==1.2.0
 rdkit
 requests
 pydantic>=2.0
