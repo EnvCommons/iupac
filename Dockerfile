@@ -14,6 +14,11 @@ RUN apt update && apt upgrade -y && apt install -y \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+# OPSIN, which parses predicted IUPAC names, runs on Java.
+RUN apt update && apt install -y --no-install-recommends default-jre-headless \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh

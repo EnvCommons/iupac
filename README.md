@@ -38,7 +38,7 @@ This is a single-turn environment with two validation strategies:
 
 **SMILES Validation (Deterministic)**: Uses RDKit for canonicalization, handling equivalent representations (e.g., `c1ccccc1` equals `C1=CC=CC=C1` for benzene).
 
-**IUPAC Validation (LLM Grader)**: Uses gpt-5-mini for flexible name matching, handling nomenclature variations (e.g., "propan-1-ol" equals "1-propanol").
+**IUPAC Validation (Structure Match)**: The predicted name is parsed to a structure with [OPSIN](https://github.com/dan2097/opsin) and compared with the reference by RDKit canonical SMILES, ignoring stereochemistry. Charges and tautomers are compared as written, as in SMILES validation. Any name for the right structure is accepted (e.g., "propan-1-ol" equals "1-propanol"; von Baeyer and fused-ring names of the same ring system are equal). Names OPSIN cannot parse are judged by a gpt-5-mini grader, as are non-matching names on the few tasks whose reference name OPSIN reads as a different structure.
 
 Reward is binary: 1.0 if correct, 0.0 if incorrect. For iupac2smiles, a SMILES that is empty or cannot be parsed or canonicalized is not graded: it returns reward 0.0 and the episode stays open so the agent can resubmit.
 
@@ -62,7 +62,7 @@ Single-turn. The agent reads the chemistry question and submits one answer.
 
 ## Other Environment Requirements
 
-OpenAI API key required for IUPAC name grading. Pass via `secrets={"openai_api_key": "..."}`.
+Java (for OPSIN; installed in the Docker image). OpenAI API key required for IUPAC name grading of names OPSIN cannot parse. Pass via `secrets={"openai_api_key": "..."}`.
 
 ## Safety
 
