@@ -188,8 +188,14 @@ print(f"Loaded {len(ANSWERS)} IUPAC tasks across {len(ALL_TASKS)} splits")
 
 # Uncapped, a looping thinking trace on the served judge ran for up to 40 min and stalled a shared replica.
 GRADER_MAX_TOKENS = 16384
-# A capped reasoning trace can end without a verdict; such replies are re-sampled this many times.
-GRADER_VERDICT_ATTEMPTS = 3
+# Request settings for each grader attempt. A capped reasoning trace can end without a
+# verdict, and such a reply or a timed-out request moves on to the next attempt. The last
+# asks for low reasoning effort under a shorter cap, and the timeouts keep the whole grading
+# within the tool-call time limit. A name still without a verdict is returned ungraded.
+GRADER_ATTEMPTS = (
+    {"max_completion_tokens": GRADER_MAX_TOKENS, "timeout": 300},
+    {"max_completion_tokens": 4096, "reasoning_effort": "low", "timeout": 120},
+)
 
 IUPAC_GRADER_TEMPLATE = """You are a chemistry expert evaluating IUPAC nomenclature.
 
@@ -314,8 +320,9 @@ class IUPAC(Environment):
 
         This tool validates your answer and returns reward + feedback.
         The episode ends after calling this tool (finished=True), unless a
-        SMILES answer cannot be parsed or canonicalized or the answer is empty,
-        in which case it is not graded and you may resubmit.
+        SMILES answer cannot be parsed or canonicalized, the answer is empty, or
+        an IUPAC name could not be graded, in which case it is not graded and
+        you may resubmit.
         """
         if self.submitted > 0:
             return ToolOutput(
@@ -334,10 +341,10 @@ class IUPAC(Environment):
             result = await self._validate_iupac(params.answer)
 
         # Only a call that actually compared against the reference counts. An
-        # unparseable SMILES or an empty answer returns early with an "error" and
-        # finished=False and never reached the comparison, so it neither burns the
-        # attempt nor ends the episode; a GradingError propagates and never gets
-        # here at all.
+        # unparseable SMILES, an empty answer or a name the grader reached no
+        # verdict on returns early with an "error" and finished=False and was never
+        # compared, so it neither burns the attempt nor ends the episode; a
+        # GradingError propagates and never gets here at all.
         if not (result.metadata or {}).get("error"):
             self.submitted += 1
         return result
@@ -453,7 +460,8 @@ The structures do not match."""
         (alternative numbering, von Baeyer vs fused nomenclature, substituent
         order) are graded alike. A name OPSIN cannot parse goes to the gpt-5-mini
         grader, as does a non-matching name on a task whose reference name OPSIN
-        itself reads as a different structure.
+        itself reads as a different structure. A name the grader reaches no
+        verdict on is not graded (finished=False), so the agent can resubmit.
         """
         if not predicted_iupac.strip():
             return ToolOutput(
@@ -490,6 +498,17 @@ The structures do not match."""
             else:
                 is_correct = await self._grade_with_llm(predicted_iupac)
                 graded_by = "llm"
+                if is_correct is None:
+                    return ToolOutput(
+                        blocks=[TextBlock(text=(
+                            "⚠️ Not graded. This name could not be matched to a structure automatically, "
+                            "and the grader reached no verdict on it. Nothing was graded and your attempt "
+                            "was not used; submit the name in standard systematic IUPAC form."))],
+                        metadata={"error": "No grader verdict", "predicted": predicted_iupac,
+                                  "task_type": "smiles2iupac"},
+                        reward=0.0,
+                        finished=False
+                    )
         reward = 1.0 if is_correct else 0.0
 
         # Format feedback for agent
@@ -516,37 +535,39 @@ Your answer: {predicted_iupac}"""
             finished=True
         )
 
-    async def _grade_with_llm(self, predicted_iupac: str) -> bool:
-        """Ask the gpt-5-mini grader whether the name matches the reference name."""
+    async def _grade_with_llm(self, predicted_iupac: str) -> bool | None:
+        """Ask the gpt-5-mini grader whether the name matches the reference name.
+
+        None when no attempt in GRADER_ATTEMPTS returns a verdict.
+        """
         grader_prompt = IUPAC_GRADER_TEMPLATE.format(
             smiles=self.answer_data["smiles"],
             reference_iupac=self.answer_data["iupac"],
             predicted_iupac=predicted_iupac
         )
 
-        verdicts: list[str] = []
-        for attempt in range(GRADER_VERDICT_ATTEMPTS):
-            grading_response = await self._call_grader(grader_prompt)
+        for attempt, settings in enumerate(GRADER_ATTEMPTS):
+            grading_response = await self._call_grader(grader_prompt, settings)
             verdicts = re.findall(
                 r"<answer>\s*(INCORRECT|CORRECT)\s*</answer>",
                 grading_response,
                 re.IGNORECASE
             )
             if verdicts:
-                break
-            # Exception messages reach the agent and the grader's response
-            # discusses the reference name, so the response is only logged.
+                return verdicts[-1].upper() == "CORRECT"
+            # Tool output reaches the agent and the grader's response discusses
+            # the reference name, so the response is only logged.
             print(f"GRADING ERROR: IUPAC grader returned no verdict "
-                  f"(attempt {attempt + 1}/{GRADER_VERDICT_ATTEMPTS}): {grading_response!r}")
-        if not verdicts:
-            raise GradingError("IUPAC grader returned no <answer>CORRECT|INCORRECT</answer> verdict")
-        return verdicts[-1].upper() == "CORRECT"
+                  f"(attempt {attempt + 1}/{len(GRADER_ATTEMPTS)}): {grading_response!r}")
+        return None
 
-    async def _call_grader(self, grader_prompt: str, max_attempts: int = 4) -> str:
+    async def _call_grader(self, grader_prompt: str, settings: dict, max_attempts: int = 4) -> str:
         """Call the grader with exponential backoff, re-raising if it never lands.
 
-        After ``max_attempts`` the last exception propagates so the SDK turns it
-        into ToolFailed, rather than the failure being swallowed into a
+        A request that exceeds its timeout returns "" (no verdict) without a
+        retry, since the next attempt in GRADER_ATTEMPTS is the retry. After
+        ``max_attempts`` other failures the last exception propagates so the SDK
+        turns it into ToolFailed, rather than the failure being swallowed into a
         fabricated reward.
         """
         last_exc: Exception | None = None
@@ -555,10 +576,13 @@ Your answer: {predicted_iupac}"""
                 response = await self.client.chat.completions.create(
                     model="gpt-5-mini",
                     messages=[{"role": "user", "content": grader_prompt}],
-                    max_completion_tokens=GRADER_MAX_TOKENS,
-                    stream=False
+                    stream=False,
+                    **settings
                 )
                 return response.choices[0].message.content or ""
+            except openai.APITimeoutError:
+                print(f"GRADER API ERROR: gpt-5-mini | timed out after {settings['timeout']}s")
+                return ""
             except Exception as e:
                 last_exc = e
                 if attempt < max_attempts - 1:

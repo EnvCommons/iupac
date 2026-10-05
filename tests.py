@@ -8,6 +8,8 @@ import asyncio
 import re
 from types import SimpleNamespace
 
+import httpx
+import openai
 import pytest
 
 import iupac as mod
@@ -21,17 +23,29 @@ UNPARSEABLE_NAME = "1-some-name"
 
 
 class ScriptedClient:
-    """Stands in for openai.AsyncClient; returns the scripted replies in order."""
+    """Stands in for openai.AsyncClient; returns the scripted replies in order.
 
-    def __init__(self, replies: list[str]) -> None:
+    A scripted exception is raised instead of replying. Each call's keyword
+    arguments are recorded in ``requests``.
+    """
+
+    def __init__(self, replies: list[str | Exception]) -> None:
         self.replies = list(replies)
         self.calls = 0
+        self.requests: list[dict] = []
         self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
 
     async def _create(self, **kwargs):
         self.calls += 1
+        self.requests.append(kwargs)
         content = self.replies.pop(0)
+        if isinstance(content, Exception):
+            raise content
         return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=content))])
+
+
+def _timeout() -> openai.APITimeoutError:
+    return openai.APITimeoutError(request=httpx.Request("POST", "https://api.openai.com/v1/chat/completions"))
 
 
 def _env(replies: list[str]) -> tuple[IUPAC, ScriptedClient]:
@@ -50,19 +64,52 @@ def test_verdict_graded_and_ends_episode():
     assert out.reward == 1.0 and out.finished is True and client.calls == 1
 
 
-def test_verdictless_reply_is_resampled():
-    env, client = _env(["", "no tags here", "Different. <answer>INCORRECT</answer>"])
+def test_verdictless_reply_is_resampled_with_low_effort():
+    env, client = _env(["no tags here", "Different. <answer>INCORRECT</answer>"])
     out = _submit(env, UNPARSEABLE_NAME)
-    assert out.reward == 0.0 and out.finished is True and client.calls == 3
+    assert out.reward == 0.0 and out.finished is True and client.calls == 2
+    first, last = client.requests
+    assert first["max_completion_tokens"] == mod.GRADER_MAX_TOKENS and "reasoning_effort" not in first
+    assert last["reasoning_effort"] == "low" and last["max_completion_tokens"] < mod.GRADER_MAX_TOKENS
 
 
-def test_verdictless_on_every_attempt_raises_without_reference():
-    env, client = _env([""] * mod.GRADER_VERDICT_ATTEMPTS)
-    with pytest.raises(GradingError) as exc:
+def test_grader_requests_are_time_bounded():
+    # A tool call that runs past about 10 minutes is lost, so the grader's
+    # timeouts must add up to well under that.
+    env, client = _env(["", ""])
+    _submit(env, UNPARSEABLE_NAME)
+    assert all(0 < r["timeout"] for r in client.requests)
+    assert sum(r["timeout"] for r in client.requests) <= 450
+
+
+def test_grader_timeout_moves_to_next_attempt():
+    env, client = _env([_timeout(), "Same structure. <answer>CORRECT</answer>"])
+    out = _submit(env, UNPARSEABLE_NAME)
+    assert out.reward == 1.0 and out.finished is True and client.calls == 2
+    assert client.requests[1]["reasoning_effort"] == "low"
+
+
+def test_verdictless_on_every_attempt_is_not_graded_without_reference():
+    env, client = _env(["", _timeout()])
+    out = _submit(env, UNPARSEABLE_NAME)
+    assert out.finished is False and out.reward == 0.0
+    assert client.calls == len(mod.GRADER_ATTEMPTS)
+    assert out.metadata["error"] and env.submitted == 0
+    _assert_no_reference(env, out, UNPARSEABLE_NAME)
+    # The attempt was not used: a resubmission is graded normally.
+    client.replies = ["Same structure. <answer>CORRECT</answer>"]
+    out = _submit(env, UNPARSEABLE_NAME)
+    assert out.reward == 1.0 and out.finished is True and env.submitted == 1
+
+
+def test_grader_api_failure_still_raises(monkeypatch):
+    async def no_sleep(_):
+        return None
+    monkeypatch.setattr(mod.asyncio, "sleep", no_sleep)
+    env, client = _env([openai.APIConnectionError(request=httpx.Request("POST", "https://x"))] * 4)
+    with pytest.raises(openai.APIConnectionError):
         _submit(env, UNPARSEABLE_NAME)
-    assert client.calls == mod.GRADER_VERDICT_ATTEMPTS
-    assert env.answer_data["iupac"] not in str(exc.value)
-    assert env.submitted == 0
+    assert client.calls == 4 and env.submitted == 0
 
 
 @pytest.mark.parametrize("answer", ["", "   ", "\n"])
