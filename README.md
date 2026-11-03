@@ -1,6 +1,6 @@
 # IUPACNames
 
-[![OpenReward Environment](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://www.openreward.ai/GeneralReasoning/IUPACNames)
+[![⭐ OpenReward Environment](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/GeneralReasoning/IUPACNames)
 
 ## Description
 
@@ -23,7 +23,7 @@ Agents are given a standard environment with no sandbox or file system access.
 
 ## Tasks
 
-There are four splits in this environment:
+There are 2,400 tasks across four splits:
 
 - **iupac2smiles_train**: 1,000 tasks
 - **iupac2smiles_test**: 200 tasks
@@ -36,7 +36,7 @@ All compounds are sourced from PubChem with non-overlapping CIDs across task typ
 
 This is a single-turn environment with two validation strategies:
 
-**SMILES Validation (Deterministic)**: Uses RDKit for canonicalization, handling equivalent representations (e.g., `c1ccccc1` equals `C1=CC=CC=C1` for benzene).
+**SMILES Validation (Deterministic)**: Uses RDKit for canonicalization with stereochemistry preserved, handling equivalent representations (e.g., `c1ccccc1` equals `C1=CC=CC=C1` for benzene).
 
 **IUPAC Validation (Structure Match)**: The predicted name is parsed to a structure with [OPSIN](https://github.com/dan2097/opsin) and compared with the reference by RDKit canonical SMILES, ignoring stereochemistry. Charges and tautomers are compared as written, as in SMILES validation. Any systematic name for the right structure is accepted (e.g., "propan-1-ol" equals "1-propanol"; von Baeyer and fused-ring names of the same ring system are equal).
 
@@ -46,7 +46,7 @@ Two rules apply before the structure match, and a name that breaks one scores 0.
 
 Names OPSIN cannot parse are judged by a gpt-5-mini grader, as are non-matching names on the few tasks whose reference name OPSIN reads as a different structure. If the grader reaches no verdict (a second, low-effort attempt included), the name is not graded: it returns reward 0.0 and the episode stays open so the agent can resubmit.
 
-Reward is binary: 1.0 if correct, 0.0 if incorrect. For iupac2smiles, a SMILES that is empty or cannot be parsed or canonicalized is not graded: it returns reward 0.0 and the episode stays open so the agent can resubmit.
+Reward is binary: 1.0 if correct, 0.0 if incorrect. For iupac2smiles, a SMILES that is empty or cannot be parsed or canonicalized is not graded: it returns reward 0.0 and the episode stays open so the agent can resubmit. Only the first graded submission is rewarded; any later call returns -0.1 and is not re-graded.
 
 ## Data
 
@@ -62,25 +62,22 @@ Data consists of JSON files containing compounds sourced from PubChem via their 
 
 Single-turn. The agent reads the chemistry question and submits one answer.
 
-## Environment Difficulty
-
-[Put environment difficulty here]
-
 ## Other Environment Requirements
 
-Java (for OPSIN; installed in the Docker image). OpenAI API key required for IUPAC name grading of names OPSIN cannot parse. Pass via `secrets={"openai_api_key": "..."}`.
+Java (for OPSIN; installed in the Docker image). An OpenAI API key (`openai_api_key` in secrets) is required: the environment refuses to start without it, and it is used to grade IUPAC names OPSIN cannot parse.
 
 ## Safety
 
 Agents in IUPACNames convert between chemical representations in a standard environment. The environment does not present direct safety risks.
 
-## Citation
+## Citations
 
 ```bibtex
-@software{iupacnames2025,
-  title={IUPACNames: Chemistry Nomenclature Environment for OpenReward},
-  author={{General Reasoning Inc. Team}},
-  year={2025},
-  url={https://www.openreward.ai/GeneralReasoning/IUPACNames}
+@dataset{GRIUPACNames,
+  author    = {General Reasoning Inc. Team},
+  title     = {IUPACNames},
+  year      = {2026},
+  publisher = {OpenReward},
+  url       = {https://openreward.ai/GeneralReasoning/IUPACNames}
 }
 ```
